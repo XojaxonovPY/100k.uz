@@ -1,0 +1,27 @@
+{% extends 'settings/index.html' %}
+{% load static %}
+{% block setting %}
+	<div class="content">
+        <div class="form-card">
+            <div class="icon">✈️</div>
+            <h2>Telegram botni biriktirish</h2>
+
+            <div class="instructions">
+                <p>1. <strong>Telegram profilingizni (username)</strong> kiriting</p>
+                <p>2. <strong>Biriktirish</strong> tugmasini bosing</p>
+                <p>3. Telegramda <strong>Start</strong> ni bosing yoki <strong>/start</strong> komandasini yuboring</p>
+            </div>
+
+            <form id="telegramForm">
+                <div class="form-group">
+                    <label for="username">Telegram link:</label>
+                    <input type="text" id="username" placeholder="username" required>
+                </div>
+                <button type="submit" class="submit-btn">Biriktirish</button>
+            </form>
+
+            <img src="{% static 'image/telegram.png' %}" alt="Telegram profil namunasi" class="sample-img">
+
+        </div>
+    </div>
+{% endblock %}

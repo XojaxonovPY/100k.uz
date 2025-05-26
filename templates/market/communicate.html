@@ -1,0 +1,19 @@
+{% extends 'base/100k.uz.html' %}
+{% load static %}
+{% block body %}
+    <main class="client-template">
+        <section class="main">
+            <div class="container p-4">
+                <br>
+                <h3>Murojat uchun</h3>
+                <br>
+                {% for communication in communications %}
+                    <p><b>Call-center:</b><a href="{{ communication.phone_number }}">{{ communication.phone_number }}</a></p>
+                    <p><b>Elektron pochta:</b>{{ communication.tg_ling }}</p>
+                    <p><b>Telegram:</b> <a href="{{ communication.tg_bot }}">{{ communication.tg_bot }}</a></p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}
+

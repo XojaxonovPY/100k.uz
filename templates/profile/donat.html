@@ -1,0 +1,130 @@
+{% extends 'base/main.html' %}
+{% load humanize %}
+{% block main %}
+    <main class="page-content" style="position: relative;">
+        <div class="charity">
+            <div class="container goback-header__container">
+                <div class="goback-header">
+                    <div class="goback-header__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                            <path d="M362.7 203.9l-159.1 144c-6.125 5.469-15.31 5.469-21.44 0L21.29 203.9C14.73 197.1 14.2 187.9 20.1 181.3C26.38 174.4 36.5 174.5 42.73 180.1L192 314.5l149.3-134.4c6.594-5.877 16.69-5.361 22.62 1.188C369.8 187.9 369.3 197.1 362.7 203.9z"></path>
+                        </svg>
+                    </div>
+                    <div class="btn"> Hayriya</div>
+                    <div class="end mobile-menu">
+                        <div class="profile">
+                            <div class="dropdown ">
+                                <div class="dropdown__btn">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                         style="height: 35px; width: 35px;">
+                                        <path fill-rule="evenodd"
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <ul class="dropdown__menu">
+                                    <div>
+                                        <li><a class="dropdown__item" href="/profile">Profil</a></li>
+                                    </div>
+                                    <li>
+                                        <button type="button" class="dropdown__item">Chiqish</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container --page">
+                <div class="total-amount">
+                    <h1>{{ total_amount|floatformat|intcomma }}so'm</h1>
+                </div>
+                <ul class="donation-list">
+                    {% for item in donations %}
+                        <li>
+                            <div class="donation-item">
+                                <div class="avatar">
+                                    <p>{{ item.amount }}</p>
+                                    <p>So'm</p>
+                                </div>
+                                <div class="info-block">
+                                    <div class="info">
+                                        <p class="name">{{ item.stream_id.pk }} - oqim</p>
+                                        <p class="position">{{ item.stream_id.visit_count }} tashrif</p>
+                                    </div>
+                                    <div class="right">
+                                        <p>id: {{ item.stream_id.id }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p class="note">{{ admin.description|safe }}
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .total-amount h1 {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .donation-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .donation-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .donation-item .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .donation-item .info-block {
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        .donation-item .name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .donation-item .position {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .donation-item .right {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .note {
+            margin-top: 40px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+{% endblock %}

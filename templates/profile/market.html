@@ -1,0 +1,272 @@
+{% extends 'base/main.html' %}
+{% load humanize %}
+{% block main %}
+    <style>
+        body {
+            background: #f9f9f9;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            padding: 12px;
+            margin-bottom: 16px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .btn-small {
+            font-size: 13px;
+            padding: 4px 8px;
+        }
+
+        .filter-bar {
+            margin-bottom: 15px;
+        }
+
+        .scroll-x {
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-bottom: 12px;
+        }
+
+        .scroll-x .btn {
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            padding: 5px 10px;
+        }
+
+        .alert {
+            font-size: 18px;
+            padding: 6px 10px;
+        }
+
+        h4.mb-4 {
+            margin-bottom: 16px !important;
+            font-size: 20px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0 6px;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .product-card .btn {
+            font-size: 13px;
+            padding: 6px 12px;
+        }
+
+        .product-card .btn-block {
+            margin-top: 8px;
+            padding: 8px 12px;
+        }
+
+        .form-inline input.form-control {
+            font-size: 13px;
+            padding: 6px 10px;
+            max-width: 350px;
+        }
+
+        .form-inline .btn {
+            font-size: 13px;
+            padding: 6px 10px;
+        }
+
+        select.form-control {
+            font-size: 13px;
+            padding: 6px 8px;
+        }
+
+        .modal .form-control {
+            font-size: 14px;
+            padding: 6px 10px;
+        }
+
+        .modal .modal-title {
+            font-size: 18px;
+        }
+
+        .modal .btn {
+            font-size: 14px;
+            padding: 6px 12px;
+        }
+
+        .modal .form-check-label {
+            font-size: 13px;
+        }
+
+        .modal .text-danger {
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .alert.alert-info:first-of-type {
+            /* Qizil rang */
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert.alert-info:last-of-type {
+            /* Default info alert */
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .alert-danger-custom {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+
+    </style>
+
+    <div class="container py-4">
+
+        <div class="alert alert-info alert-danger-custom">
+            <span>Maxsulot reklamasini olish uchun <a href="{{ admin.ling_bot }}" class="alert-link">{{ admin.tg_bot }}</a> telegram botga ulanishingiz mumkin.</span>
+        </div>
+        <div class="alert alert-info">
+            <span>Maxsulot reklamasini olish uchun <a href="{{ admin.ling_bot }}" class="alert-link">{{ admin.tg_bot }}</a> telegram botga ulanishingiz mumkin.</span>
+        </div>
+
+
+        <h4 class="mb-4">Hozirda sotuvda bor mahsulotlar</h4>
+
+        <div class="form-inline d-flex flex-wrap mb-3">
+            <form method="get" action="{% url 'market' %}">
+                <select name="seller" class="form-control mr-2 mb-3" onchange="this.form.submit()">
+                    <option value="">Sotuvchini tanlang</option>
+                    <option value="all">Barchasi</option>
+                    {% for seller in sellers %}
+                        <option value="{{ seller.pk }}">{{ seller.name }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+            <form method="post" action="{% url 'search' %}" class="form-inline d-flex flex-wrap mb-3">
+                {% csrf_token %}
+                <input type="text" class="form-control mr-2 " name="name" placeholder="Qidiruv...">
+                <button type="submit" class="btn btn-primary">Izlash</button>
+            </form>
+        </div>
+
+        <div class="scroll-x mb-4">
+            {% for tag in tags %}
+                <button class="btn btn-dark">
+                    <a href="{% url 'market' %}?tag={{ tag.pk }}">{{ tag.name }}</a>
+                </button>
+            {% endfor %}
+            <button class="btn btn-outline-secondary">
+                <a href="{% url 'market' %}?category=all">Barchasi</a>
+            </button>
+            {% for category in categories %}
+                <button class="btn btn-outline-secondary">
+                    <a href="{% url 'market' %}?category={{ category.pk }}"> {{ category.name }} </a>
+                </button>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <a href="{% url 'detail' product.pk %}">
+                            <img src="{{ product.main_image.url }}" class="product-image" alt="{{ product.name }}">
+                        </a>
+                        <a href="{% url 'detail' product.pk %}">
+                            <h3 class="mt-2">{{ product.name }}</h3>
+                        </a>
+                        <p class="mb-1 text-muted">{{ product.discount_price|floatformat|intcomma }} so'm |
+                            <small class="text-info">Reklama</small></p>
+                        <p>To'lov: <strong>{{ product.seller_price|floatformat|intcomma }} so'm</strong></p>
+                        <p>Sotuvchi: <a href="#">{{ product.seller.name }}</a></p>
+                        <p>Zaxirada: <span class="text-success">{{ product.quantity }} ta</span></p>
+                        <p>Sotilish foizi: <span class="text-success">{{ product.sell_percentage }}%</span></p>
+                        <div class="mb-2">🔮 Kreativlar: <a href="#">Ko'rastish</a></div>
+                        <button class="btn btn-outline-primary btn-small mb-2">Reklama posti</button>
+                        <button class="btn btn-primary btn-block"
+                                onclick="openOqimModal('{{ product.id }}')">
+                            Oqim yaratish
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Oqim yaratish Modal -->
+        <div class="modal fade" id="oqimModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <form action="{% url 'stream-save' %}" method="POST" id="oqimForm">
+                    {% csrf_token %}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Oqim yaratish</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="product" id="oqimProductId">
+                            <div class="form-group">
+                                <label for="oqimName">Oqim nomi <span class="text-danger">*</span></label>
+                                <input type="text" name="name" id="oqimName" class="form-control" required>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" name="operator" id="operatorCheck" class="form-check-input">
+                                <label for="operatorCheck" class="form-check-label">Buyurtmalarni operatorsiz qabul
+                                    qilish?</label>
+                            </div>
+                            <div class="text-danger">Bepul yetkazish butunlay olib tashlandi!</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Oqim yaratish</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script>
+        function openOqimModal(productId) {
+            document.getElementById('oqimProductId').value = productId;
+            document.getElementById('oqimName').value = '';
+            document.getElementById('operatorCheck').checked = false;
+            $('#oqimModal').modal('show');
+        }
+
+        function copyToClipboard() {
+            const copyText = document.getElementById("oqimLink");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("Link nusxalandi: " + copyText.value);
+        }
+    </script>
+
+    <!-- Bootstrap JS + jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+{% endblock %}

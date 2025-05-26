@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parolni o'zgartirish</title>
+    <style>
+        /* Universal Tozalangan CSS */
+
+        /* Asosiy Body */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #f1f5f9;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px 18px;
+            text-decoration: none;
+            color: #334155;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        /* Kontent qismi */
+        .content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Form Card */
+        .form-card {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        /* Form sarlavha */
+        .form-card h2 {
+            margin-bottom: 24px;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        /* Icon */
+        .icon {
+            width: 70px;
+            height: 70px;
+            background: #e0e7ff;
+            color: #2563eb;
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        /* Inputlar */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #f8fafc;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            border-color: #2563eb;
+            background: #ffffff;
+            outline: none;
+        }
+
+        /* Buttonlar */
+        button {
+            width: 100%;
+            background: #facc15;
+            color: #1e293b;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #eab308;
+        }
+
+        /* Kichik Ekranlar uchun Responsiv */
+        @media (max-width: 768px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .form-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .btn-facebook {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+
+        .btn-facebook:hover {
+            background-color: #145dbf;
+            color: #fff;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="layout">
+
+    <div class="sidebar">
+        <a href="{% url 'account' request.user.pk %}">Shaxsiy ma'lumotlar</a>
+        <a href="{% url 'number' request.user.pk %}">Telefon raqamni o'zgartirish</a>
+        <a href="{% url 'password' request.user.pk %}">Parolni o'zgartirish</a>
+        <a href="{% url 'telegram' %}">Telegram bilan bog'lash</a>
+        <a href="{% url 'facebook' %}">Facebook bog'lash</a>
+        <a href="{% url 'main' %}">Asosiy menyuga qaytish</a>
+    </div>
+    {% block setting %}
+
+    {% endblock %}
+
+</div>
+{#<script>#}
+{#    document.getElementById('passwordForm').addEventListener('submit', function (e) {#}
+{#        e.preventDefault();#}
+{#        const newPassword = document.getElementById('newPassword').value;#}
+{#        const confirmPassword = document.getElementById('confirmPassword').value;#}
+{##}
+{#        if (newPassword.length < 8) {#}
+{#            alert('Parol kamida 8 ta belgidan iborat bo‘lishi kerak.');#}
+{#        } else if (newPassword !== confirmPassword) {#}
+{#            alert('Parollar mos kelmayapti.');#}
+{#        } else {#}
+{#            alert('Parol muvaffaqiyatli o‘zgartirildi!');#}
+{#            // bu yerda serverga yuborish kodi yoziladi#}
+{#        }#}
+{#    });#}
+{#</script>#}
+{#<script>#}
+{#    // Form submit logikasi#}
+{#    document.getElementById('phoneForm').addEventListener('submit', function (e) {#}
+{#        e.preventDefault();#}
+{#        const phoneNumber = document.getElementById('phoneNumber').value;#}
+{##}
+{#        if (phoneNumber.trim() === '') {#}
+{#            alert('Iltimos, telefon raqamingizni kiriting!');#}
+{#        } else {#}
+{#            alert('Kod yuborildi: ' + phoneNumber);#}
+{#            // Backend serverga so'rov yuborish joyi shu yerda#}
+{#        }#}
+{#    });#}
+{#</script>#}
+</body>
+</html>

@@ -1,0 +1,50 @@
+[
+  {
+    "model": "apps.option",
+    "pk": 1,
+    "fields": {
+      "attribute_id": 1,
+      "name": "Qora"
+    }
+  },
+  {
+    "model": "apps.option",
+    "pk": 2,
+    "fields": {
+      "attribute_id": 1,
+      "name": "Kulrang"
+    }
+  },
+  {
+    "model": "apps.option",
+    "pk": 3,
+    "fields": {
+      "attribute_id": 1,
+      "name": "Oq"
+    }
+  },
+  {
+    "model": "apps.option",
+    "pk": 4,
+    "fields": {
+      "attribute_id": 2,
+      "name": "40"
+    }
+  },
+  {
+    "model": "apps.option",
+    "pk": 5,
+    "fields": {
+      "attribute_id": 2,
+      "name": "39"
+    }
+  },
+  {
+    "model": "apps.option",
+    "pk": 6,
+    "fields": {
+      "attribute_id": 2,
+      "name": "43"
+    }
+  }
+]

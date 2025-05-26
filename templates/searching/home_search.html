@@ -1,0 +1,86 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mahsulotlar</title>
+    <style>
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .siteSearch--info--item {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+        }
+
+        .siteSearch--info--item:hover {
+            background-color: #f7f7f7;
+        }
+
+        .product-img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            margin-right: 15px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    {% for product in products %}
+        <li>
+            <a href="{% url 'detail' product.pk %}" class="siteSearch--info--item">
+                <img src="{{ product.main_image.url }}" alt="{{ product.name }}" class="product-img">
+                <div class="product-info">
+                    <div class="d-flex justify-content-between">
+                        <div class="product-name">{{ product.name }}</div>
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="product-price">{{ product.discount_price|floatformat|intcomma }} so'm</div>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- FontAwesome yulduzcha ikonkalari uchun -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html>

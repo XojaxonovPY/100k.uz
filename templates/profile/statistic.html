@@ -1,0 +1,200 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load humanize %}
+{% block main %}
+    <div class="container">
+        <form action="{% url 'search-statistic' %}" method="post">
+            {% csrf_token %}
+            <div class="search-bar">
+                <button class="close-btn">X</button>
+                <input name="search" type="text" placeholder="Qidiruv...">
+                <button type="submit" class="search-btn">Izlash</button>
+            </div>
+        </form>
+        <div class="tabs">
+            <div class="tab active" data-target="oqim-table">Oqim</div>
+            <div class="tab" data-target="sana-table">Sana</div>
+        </div>
+
+
+        <table id="oqim-table" class="data-table">
+            <thead>
+            <tr>
+                <th>Oqim</th>
+                <th>Foyda</th>
+                <th>Tashrif</th>
+                <th>Yangi</th>
+                <th>Dostavkaga tayyor</th>
+                <th>Yetkazilmoqda</th>
+                <th>Yetqazib Berildi</th>
+                <th>Qaytib Keldi</th>
+                <th>HOLD</th>
+                <th>Arxivlandi</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stream in streams %}
+                <tr>
+                    <td>{{ stream.name }}</td>
+                    {% if stream.delivered_count %}
+                        <td>{{ stream.product__seller_price|floatformat|intcomma }}</td>
+                    {% else %}
+                        <td>0</td>
+                    {% endif %}
+                    <td>{{ stream.visit_count }}</td>
+                    <td>{{ stream.new_count }}</td>
+                    <td>{{ stream.redy_count }}</td>
+                    <td>{{ stream.delivering_count }}</td>
+                    <td>{{ stream.delivered_count }}</td>
+                    <td>{{ stream.come_count }}</td>
+                    <td>{{ stream.hold_count }}</td>
+                    <td>{{ stream.archive_count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Sana jadvali -->
+        <table id="sana-table" class="data-table" style="display: none;">
+            <thead>
+            <tr>
+                <th>Sana</th>
+                <th>Foyda</th>
+                <th>Yangi</th>
+                <th>Qabul Qilindi</th>
+                <th>Yetkazilmoqda</th>
+                <th>Yetqazib Berildi</th>
+                <th>Qaytib Keldi</th>
+                <th>HOLD</th>
+                <th>Arxivlandi</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stream in streams %}
+                <tr>
+                    <td>{{ stream.created_at|date:"Y.m.d H:i" }}</td>
+                    {% if stream.delivered_count %}
+                        <td>{{ stream.product.seller_price }}</td>
+                    {% else %}
+                        <td>0</td>
+                    {% endif %}
+                    <td>{{ stream.visit_count }}</td>
+                    <td>{{ stream.new_count }}</td>
+                    <td>{{ stream.redy_count }}</td>
+                    <td>{{ stream.delivering_count }}</td>
+                    <td>{{ stream.delivered_count }}</td>
+                    <td>{{ stream.come_count }}</td>
+                    <td>{{ stream.hold_count }}</td>
+                    <td>{{ stream.archive_count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 1050px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 200px;
+        }
+
+        .tab.active {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px 0;
+        }
+    </style>
+
+    <!-- JS -->
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const tables = document.querySelectorAll('.data-table');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Toggle active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show relevant table
+                const targetId = tab.dataset.target;
+                tables.forEach(table => {
+                    table.style.display = table.id === targetId ? 'table' : 'none';
+                });
+            });
+        });
+    </script>
+{% endblock %}

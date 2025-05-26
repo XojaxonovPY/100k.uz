@@ -1,0 +1,16 @@
+{% extends 'settings/index.html' %}
+{% block setting %}
+    <div class="content">
+        <div class="form-card">
+            <h2>Telefon raqamni o'zgartirish</h2>
+            <div class="icon">
+                📞
+            </div>
+            <form id="phoneForm" action="{% url 'number' request.user.pk %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="phone_number" id="phoneNumber" placeholder="+998 (XX) XXX-XX-XX" required>
+                <button type="submit">Kodini olish</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

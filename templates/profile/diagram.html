@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Viloyatlar bo‘yicha buyurtmalar</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<div style="display: flex; justify-content: space-between; ">
+    <h2>Viloyatlar bo‘yicha buyurtmalar soni</h2>
+    <a href="{% url 'main' %}"><h2>Exit</h2></a>
+</div>
+<canvas id="regionChart" width="100" height="50"></canvas>
+
+<script>
+    const labels = {{ labels|safe }};
+    const data = {{ data|safe }};
+
+    const ctx = document.getElementById('regionChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Buyurtmalar soni',
+                data: data,
+                backgroundColor: [
+                    '#36A2EB', '#FF6384', '#FF8C42', '#FFCE56', '#4BC0C0',
+                    '#9966FF', '#C0C0C0', '#36A2EB', '#FF6384', '#FFA726',
+                    '#FFD54F', '#4DB6AC', '#BA68C8', '#BDBDBD'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {beginAtZero: true}
+            }
+        }
+    });
+</script>
+</body>
+</html>
+

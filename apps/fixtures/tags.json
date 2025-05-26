@@ -1,0 +1,30 @@
+[
+  {
+    "model": "apps.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Yangi"
+    }
+  },
+  {
+    "model": "apps.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Yuqori Sotuv"
+    }
+  },
+  {
+    "model": "apps.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Top"
+    }
+  },
+  {
+    "model": "apps.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Zaxira"
+    }
+  }
+]

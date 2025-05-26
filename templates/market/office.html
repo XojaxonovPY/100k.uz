@@ -1,0 +1,66 @@
+{% extends 'base/100k.uz.html' %}
+{% load humanize %}
+{% block body %}
+    <main class="client-template">
+        <section class="main">
+            <div class="container pb-4 text-center px-2">
+                <br><br><br>
+                <h3> Afsuski sahifa topilmadi </h3><br>
+                <p> Siz notog'ri havola orqali tashrif qildingiz yoki ushbu sahifa o'chirilgan bolishi mumkin. </p>
+                <p class="pt-2"><a href="{% url 'home' %}" class="btn btn-primary" style="max-width: 200px">Bosh
+                    sahifaga
+                    qaytish</a></p>
+                <br>
+
+                <div class="productsList py-4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <h2 class="mb-3 font-weight-bold">Yangi kelgan mahsulotlar</h2>
+                        </div>
+                        <div class="col-auto">
+                            <div class="mb-3">
+                                <a href="https://100k.uz/explore?sort=new">Barchasini ko'rish</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="productsList--item">
+                                    <a href="{% url 'detail' product.pk %}"
+                                       class="productsList--item--link"></a>
+                                    <div class="productsList--item--image">
+                                        <img src="{{ product.main_image.url }}"
+                                             width="200" height="200" alt="{{ product.name }}">
+                                    </div>
+                                    <div class="productsList--item--info">
+                                        <div class="productsList--item--title">
+                                            {{ product.name }}
+                                        </div>
+                                        <div class="productsList--item--price">
+                                            {% if product.discount %}
+                                                <strong class="font-weight-bold">{{ product.sale|floatformat|intcomma }}</strong>
+                                                <strike class="small font-weight-bold">{{ product.discount_price |floatformat|intcomma }}</strike>
+                                            {% endif %}
+                                            <strong class="font-weight-bold">{{ product.price|floatformat|intcomma }}</strong>
+                                            <span class="small">so'm</span>
+                                        </div>
+                                        <div class="productsList--item--orders">
+                                            buyurtmalar:{{ product.order_count }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <style>
+                            .productsList--item--image {
+                                height: 200px;
+                                object-fit: cover;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

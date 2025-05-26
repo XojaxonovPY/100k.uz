@@ -1,0 +1,68 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load humanize %}
+{% block main %}
+    <div class="page-wrapper">
+        <main class="page-content">
+            <div class="dashboard">
+                <div class="container">
+                    <div class="top">
+                        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                             class="profile-img" style="height: 35px; width: 35px;">
+                            <path fill-rule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        <p class=""></p>
+                        <p class="subtitle" style="padding-top: 10px;">Saytda "2025-04-17" chi sanadan </p>
+                        <p class="subtitle" style="padding-top: 0px; color: rgb(221, 221, 221);">Biz bilan bog'lanish:
+                            <a href="{{ admin.ling_bot }}"
+                               style="color: rgb(244, 67, 54);">{{ admin.tg_bot }}</a></p></div>
+                    <div class="balance-card"><p>Hisobingizda</p>
+                        <h2>{{ request.user.balance|floatformat|intcomma }}  bonus</h2>
+                        <div class="space-b"><p>Tahminiy balans: {{ request.user.balance|floatformat|intcomma }} bonus</p><h4>100k</h4></div>
+                    </div>
+                    <div class="statistics"></div>
+                    <div class="category__cards"><a href="https://telegra.ph/100kuz-Adminlar-uchun-qollanma-11-15"
+                                                    class="category__card" target="_blank" rel="noreferrer">
+                        <div class="category__card-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+                        <p class="category__card-text">Dastur haqida</p></a><a class="category__card"
+                                                                               href="{% url 'request' %}">
+                        <div class="category__card-icon"><i class="fa-solid fa-list-ul"></i></div>
+                        <p class="category__card-text">So'rovlar (0)</p></a><a class="category__card"
+                                                                               href="{% url 'balance' %}">
+                        <div class="category__card-icon"><i class="fa-solid fa-money-bill-1"></i></div>
+                        <p class="category__card-text">Balans tarixi</p></a><a class="category__card"
+                                                                               href="{% url 'penalty' %}">
+                        <div class="category__card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <p class="category__card-text">Jarimalar</p></a><a class="category__card" href="{% url 'chart' %}">
+                        <div class="category__card-icon"><i class="fa-solid fa-chart-simple"></i></div>
+                        <p class="category__card-text">Diagrammalar</p></a><a class="category__card"
+                                                                              href="{% url 'donat' %}">
+                        <div class="category__card-icon"><i class="fa-solid fa-box"></i></div>
+                        <p class="category__card-text">Hayriya qutisi</p></a><a href="https://t.me/changelog_100k"
+                                                                                class="category__card" target="_blank"
+                                                                                rel="noreferrer">
+                        <div class="category__card-icon">
+                            <div class="telegram-icon"><i class="fa-brands fa-telegram"></i></div>
+                        </div>
+                        <p class="category__card-text">Reklama postlari</p></a></div>
+                    <div class="dashboard-news">
+                        {% for new in news %}
+                            <div class="news__item p-10 mb-10"><img
+                                    src="{{ new.image }}"
+                                    alt="">
+                                <div class="news__content"><h2 class="title">{{ new.title }}</h2>
+                                    <div class="subtitle"><p>{{ new.description|safe }}</p></div>
+                                    <p class="release_date caption-l"><span
+                                            class="date">{{ new.created_at|date:'d.m.Y H:i' }}</span><span
+                                            class="time"></span></p></div>
+                            </div>
+                        {% endfor %}
+                        <a class="show-all" href="{% url 'news' %}">Barchasini ko'rish</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

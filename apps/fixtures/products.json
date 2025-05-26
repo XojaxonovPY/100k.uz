@@ -1,0 +1,362 @@
+[
+  {
+    "model": "apps.product",
+    "pk": 1,
+    "fields": {
+      "name": "Airpots pro 2",
+      "quantity": 39,
+      "description": "<p>good headphones</p>",
+      "video": "",
+      "discount": 30,
+      "price": "180000.00",
+      "main_image": "product/airpods.jpg",
+      "creat_at": "2025-04-29T18:46:27.212Z",
+      "seller_price": "70000.00",
+      "category": 4,
+      "attribute": null,
+      "seller": 3,
+      "order_count": 1,
+      "visit_count": 9
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 2,
+    "fields": {
+      "name": "Mersedes gelig oyinchoq",
+      "quantity": 50,
+      "description": "<p>Juda yaxshi chidamli o&#39;yinchoq</p>",
+      "video": "",
+      "discount": 0,
+      "price": "150000.00",
+      "main_image": "product/mashina.jpg",
+      "creat_at": "2025-04-29T18:50:11.832Z",
+      "seller_price": "50000.00",
+      "category": 1,
+      "attribute": null,
+      "seller": 4,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 3,
+    "fields": {
+      "name": "Bilak uzuk",
+      "quantity": 45,
+      "description": "<p>ajoyib hamyonbop</p>",
+      "video": "",
+      "discount": 0,
+      "price": "110000.00",
+      "main_image": "product/bilakuziuk.jpg",
+      "creat_at": "2025-04-29T18:53:07.367Z",
+      "seller_price": "65000.00",
+      "category": 6,
+      "attribute": null,
+      "seller": 5,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 4,
+    "fields": {
+      "name": "Jinoyat va jazo FDostayevskiy",
+      "quantity": 70,
+      "description": "<p>juda yaxshi kiob</p>",
+      "video": "",
+      "discount": 0,
+      "price": "50000.00",
+      "main_image": "product/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
+      "creat_at": "2025-04-29T18:56:27.655Z",
+      "seller_price": "10000.00",
+      "category": 3,
+      "attribute": null,
+      "seller": 4,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 5,
+    "fields": {
+      "name": "Sut",
+      "quantity": 48,
+      "description": "<p>tabiiy sut</p>",
+      "video": "",
+      "discount": 0,
+      "price": "18000.00",
+      "main_image": "product/sut.jpg",
+      "creat_at": "2025-04-29T19:00:11.388Z",
+      "seller_price": "5000.00",
+      "category": 5,
+      "attribute": null,
+      "seller": 1,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 6,
+    "fields": {
+      "name": "Nike krasofka",
+      "quantity": 60,
+      "description": "<p>Sivatli va chidamli qulay</p>",
+      "video": "",
+      "discount": 0,
+      "price": "200000.00",
+      "main_image": "product/krosovka.jpg",
+      "creat_at": "2025-04-29T19:03:40.881Z",
+      "seller_price": "80000.00",
+      "category": 2,
+      "attribute": 2,
+      "seller": 2,
+      "order_count": 0,
+      "visit_count": 1
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 7,
+    "fields": {
+      "name": "Airpots pro 2",
+      "quantity": 39,
+      "description": "<p>good headphones</p>",
+      "video": "",
+      "discount": 0,
+      "price": "180000.00",
+      "main_image": "product/airpods.jpg",
+      "creat_at": "2025-04-29T18:46:27.212Z",
+      "seller_price": "70000.00",
+      "category": 4,
+      "attribute": null,
+      "seller": 3,
+      "order_count": 1,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 8,
+    "fields": {
+      "name": "Airpots pro 2",
+      "quantity": 39,
+      "description": "<p>good headphones</p>",
+      "video": "",
+      "discount": 0,
+      "price": "180000.00",
+      "main_image": "product/airpods.jpg",
+      "creat_at": "2025-04-29T18:46:27.212Z",
+      "seller_price": "70000.00",
+      "category": 4,
+      "attribute": null,
+      "seller": 3,
+      "order_count": 1,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 9,
+    "fields": {
+      "name": "Mersedes gelig oyinchoq",
+      "quantity": 48,
+      "description": "<p>Juda yaxshi chidamli o&#39;yinchoq</p>",
+      "video": "",
+      "discount": 0,
+      "price": "150000.00",
+      "main_image": "product/mashina.jpg",
+      "creat_at": "2025-04-29T18:50:11.832Z",
+      "seller_price": "50000.00",
+      "category": 1,
+      "attribute": null,
+      "seller": 4,
+      "order_count": 2,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 10,
+    "fields": {
+      "name": "Mersedes gelig oyinchoq",
+      "quantity": 50,
+      "description": "<p>Juda yaxshi chidamli o&#39;yinchoq</p>",
+      "video": "",
+      "discount": 0,
+      "price": "150000.00",
+      "main_image": "product/mashina.jpg",
+      "creat_at": "2025-04-29T18:50:11.832Z",
+      "seller_price": "50000.00",
+      "category": 1,
+      "attribute": null,
+      "seller": 4,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 11,
+    "fields": {
+      "name": "Bilak uzuk",
+      "quantity": 44,
+      "description": "<p>ajoyib hamyonbop</p>",
+      "video": "",
+      "discount": 0,
+      "price": "110000.00",
+      "main_image": "product/bilakuziuk.jpg",
+      "creat_at": "2025-04-29T18:53:07.367Z",
+      "seller_price": "65000.00",
+      "category": 6,
+      "attribute": null,
+      "seller": 5,
+      "order_count": 1,
+      "visit_count": 1
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 12,
+    "fields": {
+      "name": "Bilak uzuk",
+      "quantity": 45,
+      "description": "<p>ajoyib hamyonbop</p>",
+      "video": "",
+      "discount": 0,
+      "price": "110000.00",
+      "main_image": "product/bilakuziuk.jpg",
+      "creat_at": "2025-04-29T18:53:07.367Z",
+      "seller_price": "65000.00",
+      "category": 6,
+      "attribute": null,
+      "seller": 5,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 13,
+    "fields": {
+      "name": "Jinoyat va jazo FDostayevskiy",
+      "quantity": 70,
+      "description": "<p>juda yaxshi kiob</p>",
+      "video": "",
+      "discount": 0,
+      "price": "50000.00",
+      "main_image": "product/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
+      "creat_at": "2025-04-29T18:56:27.655Z",
+      "seller_price": "10000.00",
+      "category": 3,
+      "attribute": null,
+      "seller": 4,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 14,
+    "fields": {
+      "name": "Jinoyat va jazo FDostayevskiy",
+      "quantity": 69,
+      "description": "<p>juda yaxshi kiob</p>",
+      "video": "",
+      "discount": 0,
+      "price": "50000.00",
+      "main_image": "product/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
+      "creat_at": "2025-04-29T18:56:27.655Z",
+      "seller_price": "10000.00",
+      "category": 3,
+      "attribute": null,
+      "seller": 4,
+      "order_count": 1,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 15,
+    "fields": {
+      "name": "Sut",
+      "quantity": 48,
+      "description": "<p>tabiiy sut</p>",
+      "video": "",
+      "discount": 0,
+      "price": "18000.00",
+      "main_image": "product/sut.jpg",
+      "creat_at": "2025-04-29T19:00:11.388Z",
+      "seller_price": "5000.00",
+      "category": 5,
+      "attribute": null,
+      "seller": 1,
+      "order_count": 0,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 16,
+    "fields": {
+      "name": "Sut",
+      "quantity": 47,
+      "description": "<p>tabiiy sut</p>",
+      "video": "",
+      "discount": 0,
+      "price": "18000.00",
+      "main_image": "product/sut.jpg",
+      "creat_at": "2025-04-29T19:00:11.388Z",
+      "seller_price": "5000.00",
+      "category": 5,
+      "attribute": null,
+      "seller": 1,
+      "order_count": 1,
+      "visit_count": 0
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 17,
+    "fields": {
+      "name": "Nike krasofka",
+      "quantity": 60,
+      "description": "<p>Sivatli va chidamli qulay</p>",
+      "video": "",
+      "discount": 0,
+      "price": "200000.00",
+      "main_image": "product/krosovka.jpg",
+      "creat_at": "2025-04-29T19:03:40.881Z",
+      "seller_price": "80000.00",
+      "category": 2,
+      "attribute": 1,
+      "seller": 2,
+      "order_count": 0,
+      "visit_count": 1
+    }
+  },
+  {
+    "model": "apps.product",
+    "pk": 18,
+    "fields": {
+      "name": "Nike krasofka",
+      "quantity": 59,
+      "description": "<p>Sivatli va chidamli qulay</p>",
+      "video": "",
+      "discount": 15,
+      "price": "200000.00",
+      "main_image": "product/krosovka.jpg",
+      "creat_at": "2025-04-29T19:03:40.881Z",
+      "seller_price": "80000.00",
+      "category": 2,
+      "attribute": 1,
+      "seller": 2,
+      "order_count": 1,
+      "visit_count": 5
+    }
+  }
+]

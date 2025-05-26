@@ -1,0 +1,50 @@
+[
+  {
+    "model": "apps.category",
+    "pk": 1,
+    "fields": {
+      "image": "categories/oyinchoqlar.jpg",
+      "name": "Oyinchoqlar"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 2,
+    "fields": {
+      "image": "categories/poyabzallar.jpg",
+      "name": "Poyabzallar"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 3,
+    "fields": {
+      "image": "categories/kitoblar.jpg",
+      "name": "Kitoblar"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 4,
+    "fields": {
+      "image": "categories/elektronika.jpg",
+      "name": "Elektronika"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 5,
+    "fields": {
+      "image": "categories/Oziq-ovqat.jpg",
+      "name": "Oziq-ovqat"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 6,
+    "fields": {
+      "image": "categories/aksesuarlar.jpg",
+      "name": "Akssesuarlar"
+    }
+  }
+]

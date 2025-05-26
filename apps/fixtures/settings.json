@@ -1,0 +1,14 @@
+[
+  {
+    "model": "apps.settings",
+    "pk": 1,
+    "fields": {
+      "phone_number": "+998(95) 679-04-08",
+      "tg_ling": "https://t.me/Gorinhas",
+      "tg_bot": "@lesson_1_project_bot",
+      "ling_bot": "https://t.me/lesson_1_project_bot",
+      "delivery_price": "20000.00",
+      "description": "<p>Assalomu aleykum, hurmatli jamoamiz adminlari.<br />\r\n<br />\r\nUshbu sahifada siz yani 100k.uz sayti<br />\r\nadminlari yordamida hayriya ishlari<br />\r\nuchun toplangan mablaglarni kuzatishingiz mumkin.<br />\r\n<br />\r\nSahifada hozircha umumiy toplangan mablagni<br />\r\nva hayriya funksiyasi yoqilgan oqimlar<br />\r\nroyhatini korishingiz mumkin.<br />\r\n<br />\r\nYigilgan mablag bolalar yoki qariyalar uylari<br />\r\nhisob raqamiga yoki ogir kasalga uchragan<br />\r\nlekin davolanishga sharoiti yoq vatandoshlarimiz<br />\r\nkarta raqamlariga yonaltiriladi.<br />\r\n<br />\r\nMablagni topshirish vaqtida 100k.uz saytida<br />\r\nishlovchi istalgan admin ishtirok etishi mumkin.<br />\r\n<br />\r\nUshbu sahifa keyinchalik yangiliklar ko&#39;rinishida<br />\r\nbarcha hayriyalar haqida malumotlar chop etiladi.<br />\r\n<br />\r\nEslatma: Hayriya qutisiga mablag ajratish<br />\r\nuchun Market bolimiga tashrif buyuring va oqim yaratish<br />\r\noynasida hayriya summasini kiriting va tizim aynan osha<br />\r\noqim har bir sotilgan buyurtmasidan kiritilgan<br />\r\nhayriya summasi ushlab qoladi.<br />\r\n<br />\r\nHayriya dasturida ishtirok etmagan bo&#39;lsangiz<br />\r\nalbatta siz ham ishtirok etib hissangizni qoshing,<br />\r\nhattoki 500 so&#39;m ham kopchilik yordami kimnidir<br />\r\nhayotini saqlab qolishi yoki yahshilikka ozgartirishi mumkin.<br />\r\n<br />\r\nBirgalikda biz katta kuchmiz!</p>"
+    }
+  }
+]

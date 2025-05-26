@@ -1,0 +1,47 @@
+[
+  {
+    "model": "apps.seller",
+    "pk": 1,
+    "fields": {
+      "name": "Jamshid",
+      "username_tg": "https://t.me/jonik_admin",
+      "region": 10
+    }
+  },
+  {
+    "model": "apps.seller",
+    "pk": 2,
+    "fields": {
+      "name": "G'ayrat",
+      "username_tg": "https://t.me/jonik_admin",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.seller",
+    "pk": 3,
+    "fields": {
+      "name": "Doniyor",
+      "username_tg": "https://t.me/jonik_admin",
+      "region": 9
+    }
+  },
+  {
+    "model": "apps.seller",
+    "pk": 4,
+    "fields": {
+      "name": "Jasur",
+      "username_tg": "https://t.me/jonik_admin",
+      "region": 8
+    }
+  },
+  {
+    "model": "apps.seller",
+    "pk": 5,
+    "fields": {
+      "name": "Bexruz",
+      "username_tg": "https://t.me/jonik_admin",
+      "region": 7
+    }
+  }
+]

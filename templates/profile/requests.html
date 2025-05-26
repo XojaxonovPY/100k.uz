@@ -1,0 +1,230 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block main %}
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .search-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-row input {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .search-row button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            font-size: 14px;
+            margin-left: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .tabs {
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-right: 5px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tab.active {
+            background: black;
+            color: white;
+        }
+
+        .search-bar {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px 0 0 6px;
+        }
+
+        .search-bar button {
+            padding: 8px 16px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #eee;
+            text-align: left;
+        }
+
+        th {
+            background: #f4f7fb;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: gray;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination button {
+            border: none;
+            background: transparent;
+            color: #7e57c2;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+
+    <div class="container">
+        <div class="header">Sorovkar</div>
+        <div class="search-row">
+            <input type="text" id="searchInput" placeholder="Tranzaksiya bo'yicha qidirish"/>
+            <button onclick="searchData()">Izlash</button>
+        </div>
+
+        <div class="tabs" id="tabList">
+            <a href="{% url 'request' %}"
+               class="tab {% if not request.GET.status or request.GET.status not in status %}active{% endif %}">Barchasi</a>
+
+            {% for s in status %}
+                <a href="{% url 'request' %}?status={{ s }}"
+                   class="tab {% if request.GET.status == s %}active{% endif %}"
+                   data-filter="{{ s }}">
+                    {{ s }}
+                </a>
+            {% endfor %}
+        </div>
+
+
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Oqim</th>
+                <th>Buyurtmachi / Manzil</th>
+                <th>Holat</th>
+                <th>Izoh</th>
+                <th>Sana</th>
+            </tr>
+            </thead>
+            <tbody id="dataTable">
+            {% for request in requests %}
+                <td>{{ request.stream.pk }}</td>
+                <td>{{ request.stream.name }}</td>
+                <td>{{ request.region }}</td>
+                <td>{{ request.status }}</td>
+                <td>{{ request.comment }}</td>
+                <td>{{ request.delivery_time|date:'Y.m.d' }}</td>
+            {% endfor %}
+
+            <!-- Dynamic content -->
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        function searchData() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll("#tableBody tr");
+
+            rows.forEach(row => {
+                const rowText = row.innerText.toLowerCase();
+                if (rowText.includes(input)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
+        function setupTabs() {
+            const tabs = document.querySelectorAll("#tabList .tab");
+
+            // Django'dan olingan status (JS ichiga kontekst sifatida qo‘yilyapti)
+            const currentStatus = "{{ request.status|default:'all' }}";
+
+            let matched = false;
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", () => {
+                    tabs.forEach(t => t.classList.remove("active"));
+                    tab.classList.add("active");
+
+                    const filter = tab.getAttribute("data-filter");
+                    console.log("Tanlangan filter:", filter);
+
+                    // Agar kerak bo‘lsa bu yerda renderTable(filter) chaqiring
+                    // renderTable(filter);
+                });
+
+                // Sahifa yuklanganda mos tabga "active" qo‘yish
+                if (tab.getAttribute("data-filter") === currentStatus) {
+                    tab.classList.add("active");
+                    matched = true;
+                } else {
+                    tab.classList.remove("active");
+                }
+            });
+
+            // Agar mos topilmasa, 'all'ni active qilamiz
+            if (!matched) {
+                const allTab = document.querySelector('#tabList .tab[data-filter="all"]');
+                if (allTab) allTab.classList.add("active");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", setupTabs);
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+create or replace function user_change()
+returns trigger
+language plpgsql
+as
+    $$
+    begin
+        update apps_user set balance=balance-new.amount where id=new.user_id;
+        return new;
+    end;
+    $$;
+create or replace trigger user_change_trigger
+after insert on apps_payment
+for each row execute function user_change();
+
+create function product_change()
+returns trigger
+language plpgsql
+as
+$$
+BEGIN
+    UPDATE apps_product
+    SET quantity    = quantity - new.quantity,
+        order_count = new.quantity
+    WHERE id = NEW.product_id;
+
+    RETURN NEW;
+END;
+$$;
+
+create or replace trigger product_change_trigger
+after insert or update on apps_order
+for each row execute function product_change();

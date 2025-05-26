@@ -1,0 +1,346 @@
+[
+  {
+    "model": "apps.district",
+    "pk": 1,
+    "fields": {
+      "name": "Segili tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 2,
+    "fields": {
+      "name": "Shayhontohur tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 3,
+    "fields": {
+      "name": "Yunusobod tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 4,
+    "fields": {
+      "name": "Yakkasaroy tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 5,
+    "fields": {
+      "name": "Uchtepa tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 6,
+    "fields": {
+      "name": "Yashnobod tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 7,
+    "fields": {
+      "name": "Mirobod tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 8,
+    "fields": {
+      "name": "Mirzo UlugСbek tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 9,
+    "fields": {
+      "name": "Olmazor tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 10,
+    "fields": {
+      "name": "Yangihayot tumani",
+      "region": 1
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 11,
+    "fields": {
+      "name": "Andijon shahri",
+      "region": 13
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 12,
+    "fields": {
+      "name": "Asaka",
+      "region": 13
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 13,
+    "fields": {
+      "name": "XoСjaobod",
+      "region": 13
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 14,
+    "fields": {
+      "name": "Buxoro shahri",
+      "region": 4
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 15,
+    "fields": {
+      "name": "GСijduvon",
+      "region": 4
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 16,
+    "fields": {
+      "name": "Vobkent",
+      "region": 4
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 17,
+    "fields": {
+      "name": "Urganch shahri",
+      "region": 5
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 18,
+    "fields": {
+      "name": "Xiva",
+      "region": 5
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 19,
+    "fields": {
+      "name": "Hazorasp",
+      "region": 5
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 20,
+    "fields": {
+      "name": "Navoiy shahri",
+      "region": 6
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 21,
+    "fields": {
+      "name": "Zarafshon",
+      "region": 6
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 22,
+    "fields": {
+      "name": "Karmana",
+      "region": 6
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 23,
+    "fields": {
+      "name": "Qarshi shahri",
+      "region": 8
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 24,
+    "fields": {
+      "name": "Shahrisabz",
+      "region": 8
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 25,
+    "fields": {
+      "name": "Muborak",
+      "region": 8
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 26,
+    "fields": {
+      "name": "Termiz shahri",
+      "region": 9
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 27,
+    "fields": {
+      "name": "Denov",
+      "region": 9
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 28,
+    "fields": {
+      "name": "Sherobod",
+      "region": 9
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 29,
+    "fields": {
+      "name": "Jizzax shahri",
+      "region": 10
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 30,
+    "fields": {
+      "name": "Zomin",
+      "region": 10
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 31,
+    "fields": {
+      "name": "GСallaorol",
+      "region": 10
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 32,
+    "fields": {
+      "name": "Guliston shahri",
+      "region": 12
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 33,
+    "fields": {
+      "name": "Boyovut",
+      "region": 12
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 34,
+    "fields": {
+      "name": "Sayxunobod",
+      "region": 12
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 35,
+    "fields": {
+      "name": "Nukus shahri",
+      "region": 11
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 36,
+    "fields": {
+      "name": "Taxiatosh",
+      "region": 11
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 37,
+    "fields": {
+      "name": "Beruniy",
+      "region": 11
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 38,
+    "fields": {
+      "name": "Samarqand shahri",
+      "region": 3
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 39,
+    "fields": {
+      "name": "Urgut",
+      "region": 3
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 40,
+    "fields": {
+      "name": "KattaqoСrgСon",
+      "region": 3
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 41,
+    "fields": {
+      "name": "Chirchiq",
+      "region": 2
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 42,
+    "fields": {
+      "name": "Angren",
+      "region": 2
+    }
+  },
+  {
+    "model": "apps.district",
+    "pk": 43,
+    "fields": {
+      "name": "OqqoСrgСon",
+      "region": 2
+    }
+  }
+]

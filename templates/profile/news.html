@@ -1,0 +1,52 @@
+{% extends 'base/main.html' %}
+{% block main %}
+    <main class="page-content" style="position: relative;">
+        <div class="page-news">
+            <div class="container goback-header__container">
+                <div class="goback-header">
+                    <div class="goback-header__icon">
+                        <a href="{% url 'main' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                <path d="M362.7 203.9l-159.1 144c-6.125 5.469-15.31 5.469-21.44 0L21.29 203.9C14.73 197.1 14.2 187.9 20.1 181.3C26.38 174.4 36.5 174.5 42.73 180.1L192 314.5l149.3-134.4c6.594-5.877 16.69-5.361 22.62 1.188C369.8 187.9 369.3 197.1 362.7 203.9z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="btn"> Yangiliklar</div>
+                    <div class="end mobile-menu">
+                        <div class="profile">
+                            <div class="dropdown ">
+                                <div class="dropdown__btn">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                         style="height: 35px; width: 35px;">
+                                        <path fill-rule="evenodd"
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <ul class="dropdown__menu">
+                                    <div>
+                                        <li><a class="dropdown__item" href="/profile">Profil</a></li>
+                                    </div>
+                                    <li>
+                                        <button type="button" class="dropdown__item">Chiqish</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container --page">
+                {% for new in news %}
+                    <div class="news__item p-10"><img src="{{ new.image }}"
+                                                      alt="">
+                        <div class="news__content"><h2 class="title">{{ new.title }}</h2>
+                            <div class="subtitle"><p>{{ new.description|safe }}</p></div>
+                            <p class="release_date caption-l"><span class="date">{{ new.created_at|date:'d.m.Y H:i' }}</span><span
+                                    class="time"></span></p></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

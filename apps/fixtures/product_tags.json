@@ -1,0 +1,34 @@
+[
+  {
+    "model": "apps.producttag",
+    "pk": 1,
+    "fields": {
+      "tag": 7,
+      "product": 1
+    }
+  },
+  {
+    "model": "apps.producttag",
+    "pk": 2,
+    "fields": {
+      "tag": 4,
+      "product": 4
+    }
+  },
+  {
+    "model": "apps.producttag",
+    "pk": 3,
+    "fields": {
+      "tag": 2,
+      "product": 3
+    }
+  },
+  {
+    "model": "apps.producttag",
+    "pk": 4,
+    "fields": {
+      "tag": 18,
+      "product": 2
+    }
+  }
+]

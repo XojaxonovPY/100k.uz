@@ -1,0 +1,194 @@
+{% extends 'base/100k.uz.html' %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+    <main class="client-template">
+        <section class="main">
+            <div id="notifications-container"></div>
+            <div class="container py-3">
+                <div class="row align-items-center">
+                    <div class="col my-3 pr-3">
+                        <h1 class="h4 font-weight-bold mb-0">{{ product.name }}</h1>
+                    </div>
+                    <div class="col-auto my-3 text-right">
+                        <strong data-price="{{ product.discount_price|floatformat|intcomma }}" id="productPrice"
+                                class="position-price1">
+                            {{ product.discount_price|floatformat|intcomma }}so'm
+                        </strong>
+                        <div class="text-warning">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="orderForm" method="POST" action="{% url 'order' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="owl-carousel owl-theme content_linear_card_body_indicators">
+
+                                {% if product.video %}
+                                    <div class="item text-center">
+                                        <video controls class="w-100 rounded shadow">
+                                            <source src="{{ product.video.url }}" type="video/mp4">
+                                            Brauzeringiz video formatini qo‘llab-quvvatlamaydi.
+                                        </video>
+                                    </div>
+                                {% endif %}
+
+                                {% for image in product.images.all %}
+                                    <div class="item text-center">
+                                        <img loading="lazy" class="img-fluid rounded shadow"
+                                             src="{{ image.image.url }}"
+                                             alt="{{ product.name }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div id="orderFormSection" class="col-md-6 pl-md-4 mb-4">
+                            <div class="orderForm sk-form d-flex flex-column justify-content-between"
+                                 style="min-height:100%;">
+                                <div>
+                                    <h2 class="h3 font-weight-bold mb-4"><a href="#orderFormSection">Buyurtma berish</a>
+                                    </h2>
+
+                                    <p class="mb-3">Mahsulot narxi: <strong
+                                            class="pricetag position-price2">{{ product.discount_price|floatformat|intcomma }}
+                                        so'm</strong></p>
+
+                                    <div class="alert alert-info">
+                                        <strong>Yetqazib berish narxi: {{ admin.delivery_price|floatformat|intcomma }}so'm</strong>
+                                    </div>
+                                </div>
+
+                                <div class="my-3">
+                                    <input type="hidden" name="product_id" value="{{ product.pk }}">
+                                    {% if request.user.is_authenticated %}
+                                        <input type="hidden" name="owner" value="{{ request.user.pk }}">
+                                    {% endif %}
+                                    {% if thread %}
+                                    	<input type="hidden" name="thread" value="{{ thread.pk }}">
+                                    {% endif %}
+                                    <input type="hidden" name="product" value="{{ product }}">
+
+                                    <div class="btn-group-toggle d-flex gap-3 position-btn-group flex-wrap"
+                                         data-toggle="buttons">
+                                        {% if product.attribute %}
+                                            {% for item in attribute %}
+                                                {% for option in item.options.all %}
+                                                    <label class="btn btn-lg btn-outline-secondary position-btn">
+                                                        <input type="radio" name="product_item_id"
+                                                               value="{{ option.id }}"
+                                                               id="productItem-{{ option.id }}"> {{ option.name }}
+                                                    </label>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <input class="form-control needclear" name="name" placeholder="Ismingiz"
+                                               type="text">
+                                        <div id="error_client-name" style="display: none" class="text-danger"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="my-phone-mask form-control needclear" name="phone_number"
+                                               id="customer_phone" placeholder="Telefon raqamingiz" type="text">
+                                        <div id="error_client-phone" style="display: none" class="text-danger"></div>
+                                    </div>
+
+                                    <div id="partialCountryState">
+                                        <div class="form-group">
+                                            <select required class="form-control" name="region">
+                                                <option value="" selected="selected">Hududni tanlang ⬇</option>
+                                                {% for region in regions %}
+                                                    <option value="{{ region.pk }}">{{ region.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="text-center">
+                                                <button id="btnSubmit" data-attach-loading type="submit"
+                                                        style="max-width: 100%"
+                                                        class="sk-btn sk-btn--primary sk-btn--block sk-btn--lg">
+                                                    Buyurtma berish
+                                                    <div class="loader"></div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="#productDescription" class="nav-link active" data-toggle="tab">Batafsil ma'lumot</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="productDesc py-5">
+                <div class="container px-3">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="productDescription">
+                            <div>{{ product.description|safe }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Owl Carousel Scripts -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.owl-carousel').owlCarousel({
+                    items: 1,
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    dots: true,
+                    autoplay: true,
+                    autoplayTimeout: 5000,
+                    autoplayHoverPause: true
+                });
+            });
+        </script>
+        {#        <style>#}
+        {#            .carousel-media {#}
+        {#                max-width: 100%;#}
+        {#                max-height: 400px;#}
+        {#                width: auto;#}
+        {#                height: auto;#}
+        {#                border-radius: 12px;#}
+        {#                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);#}
+        {#            }#}
+        {##}
+        {#            .owl-carousel .item {#}
+        {#                display: flex;#}
+        {#                justify-content: center;#}
+        {#                align-items: center;#}
+        {#                height: 100%;#}
+        {#                padding: 10px;#}
+        {#            }#}
+        {#        </style>#}
+    </main>
+{% endblock %}
