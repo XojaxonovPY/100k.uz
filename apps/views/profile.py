@@ -138,7 +138,7 @@ class PaymentCreatView(LoginRequiredMixin,CreateView):
         data = super().get_context_data(**kwargs)
         payment=Payment.objects.filter(user=self.request.user).order_by('-created_at')
         data['payments'] = payment
-        data['amount']=payment.order_by('-created_at').first().amount
+        data['amount']=payment.order_by('-created_at').first().amount if payment else 0
 
         return data
 

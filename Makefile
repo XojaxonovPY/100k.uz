@@ -13,10 +13,7 @@ dump:
 load:
 	 python manage.py loaddata products.json categories.json disdricts.json images.json regions.json sellers.json tags.json options.json attrs.json settings.json
 celery:
-	celery -A DjangoMarket worker --pool=solo -l info
-
-
-
+		celery -A DjangoMarket worker --pool=solo -l info
 flower:
 	celery -A DjangoMarket flower
 

@@ -95,10 +95,10 @@ class OrderView(View):
     def post(self, request):
         order = {
             'name': request.POST.get('name'),
-            'product_id': int(request.POST.get('product_id')),
+            'product_id': request.POST.get('product_id'),
             'phone_number': request.POST.get('phone_number'),
-            'region_id': int(request.POST.get('region')),
-            'owner_id': int(request.POST.get('owner')),
+            'region_id': request.POST.get('region'),
+            'owner_id': request.POST.get('owner'),
             'stream_id': request.POST.get('thread'),
         }
         admin = Settings.objects.first()
