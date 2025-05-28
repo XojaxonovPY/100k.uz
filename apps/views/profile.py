@@ -182,10 +182,9 @@ class BalanceListView(LoginRequiredMixin, ListView):
         return query
 
 def chart_view(request):
-    orders = Order.objects.order_by('region').values_list('region__name', flat=True)
-    counts = Order.objects.order_by('region').values_list('region__order_count', flat=True)
-    labels = list(orders)
-    data = list(counts)
+    orders = Order.objects.filter(owner=request.user).order_by('region')
+    labels = list(orders.values_list('region__name', flat=True))
+    data = list(orders.values_list('region__order_count', flat=True))
     return render(request, 'profile/diagram.html', {
         'labels': labels,
         'data': data
