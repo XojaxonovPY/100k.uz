@@ -33,16 +33,18 @@
 
                                 {% if product.video %}
                                     <div class="item text-center">
-                                        <video controls class="w-100 rounded shadow">
-                                            <source src="{{ product.video.url }}" type="video/mp4">
-                                            Brauzeringiz video formatini qo‘llab-quvvatlamaydi.
-                                        </video>
+                                        <div class="video-container">
+                                            <video controls class="carousel-media">
+                                                <source src="{{ product.video.url }}" type="video/mp4">
+                                                Brauzeringiz video formatini qo'llab-quvvatlamaydi.
+                                            </video>
+                                        </div>
                                     </div>
                                 {% endif %}
 
                                 {% for image in product.images.all %}
                                     <div class="item text-center">
-                                        <img loading="lazy" class="img-fluid rounded shadow"
+                                        <img loading="lazy" class="carousel-media"
                                              src="{{ image.image.url }}"
                                              alt="{{ product.name }}">
                                     </div>
@@ -72,7 +74,7 @@
                                         <input type="hidden" name="owner" value="{{ request.user.pk }}">
                                     {% endif %}
                                     {% if thread %}
-                                    	<input type="hidden" name="thread" value="{{ thread.pk }}">
+                                        <input type="hidden" name="thread" value="{{ thread.pk }}">
                                     {% endif %}
                                     <input type="hidden" name="product" value="{{ product }}">
 
@@ -158,6 +160,126 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+        <style>
+            /* Carousel media styles */
+            .carousel-media {
+                max-width: 100%;
+                max-height: 400px;
+                width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                object-fit: contain;
+                background: #f8f9fa;
+            }
+
+            /* Video container */
+            .video-container {
+                position: relative;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #000;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            /* Video specific styles */
+            video.carousel-media {
+                background: #000;
+                object-fit: contain;
+            }
+
+            /* Owl carousel item */
+            .owl-carousel .item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 300px;
+                padding: 10px;
+            }
+
+            /* Ensure consistent height for all carousel items */
+            .content_linear_card_body_indicators {
+                background: #f8f9fa;
+                border-radius: 15px;
+                padding: 15px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Owl carousel navigation */
+            .owl-nav button {
+                background: rgba(0, 0, 0, 0.5) !important;
+                color: white !important;
+                border-radius: 50% !important;
+                width: 40px !important;
+                height: 40px !important;
+                font-size: 18px !important;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .owl-nav button.owl-prev {
+                left: 10px;
+            }
+
+            .owl-nav button.owl-next {
+                right: 10px;
+            }
+
+            .owl-nav button:hover {
+                background: rgba(0, 0, 0, 0.8) !important;
+            }
+
+            /* Owl dots */
+            .owl-dots {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            .owl-dots .owl-dot {
+                display: inline-block;
+                margin: 0 5px;
+            }
+
+            .owl-dots .owl-dot span {
+                width: 12px;
+                height: 12px;
+                background: #ddd;
+                border-radius: 50%;
+                display: block;
+                transition: all 0.3s;
+            }
+
+            .owl-dots .owl-dot.active span {
+                background: #007bff;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .carousel-media {
+                    max-height: 250px;
+                }
+
+                .owl-carousel .item {
+                    min-height: 200px;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .carousel-media {
+                    max-height: 200px;
+                }
+
+                .content_linear_card_body_indicators {
+                    padding: 10px;
+                }
+            }
+        </style>
+
         <script>
             $(document).ready(function () {
                 $('.owl-carousel').owlCarousel({
@@ -168,27 +290,18 @@
                     dots: true,
                     autoplay: true,
                     autoplayTimeout: 5000,
-                    autoplayHoverPause: true
+                    autoplayHoverPause: true,
+                    navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+                    responsive: {
+                        0: {
+                            nav: false
+                        },
+                        768: {
+                            nav: true
+                        }
+                    }
                 });
             });
         </script>
-        {#        <style>#}
-        {#            .carousel-media {#}
-        {#                max-width: 100%;#}
-        {#                max-height: 400px;#}
-        {#                width: auto;#}
-        {#                height: auto;#}
-        {#                border-radius: 12px;#}
-        {#                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);#}
-        {#            }#}
-        {##}
-        {#            .owl-carousel .item {#}
-        {#                display: flex;#}
-        {#                justify-content: center;#}
-        {#                align-items: center;#}
-        {#                height: 100%;#}
-        {#                padding: 10px;#}
-        {#            }#}
-        {#        </style>#}
     </main>
 {% endblock %}
