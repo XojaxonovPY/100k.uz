@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView
@@ -50,8 +51,11 @@ class OrderDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         data=super().get_context_data(**kwargs)
+        order = self.get_object(self.queryset)
+        data['max_quantity'] = order.product.quantity
         data['regions']=Region.objects.all()
         return data
+
 
 class OrderUpdateView(UpdateView):
     queryset = Order.objects.all()

@@ -109,5 +109,5 @@ class OrderView(View):
         context = {'order': order, 'products': products, 'product_item': product, 'admin': admin}
         return render(request, 'market/order.html', context=context)
 
-# =========================================================Search
+
 

@@ -66,6 +66,11 @@
 
 <div class="container py-5">
     <div class="form-section">
+        {% if messages %}
+            {% for message in messages %}
+                <h5 style="color: red;">{{ message }}</h5>
+            {% endfor %}
+        {% endif %}
 
         <div class="container">
 
@@ -101,7 +106,7 @@
                 <div class="col-md-6 mb-3">
                     <label for="quantity"
                            class="form-label required-label"><strong>{% trans "Nechta:" %}</strong></label>
-                    <input id="quantity" class="form-select" name="quantity" required type="number" max="100" min="1"
+                    <input id="quantity" class="form-select" name="quantity" required type="number" max="{{ max_quantity }}" min="1"
                            value="{{ order.quantity }}">
 
                 </div>
@@ -150,7 +155,7 @@
             <div class="row form-section">
                 <div class="col-md-6 mb-3">
                     <label for="quantity" class="form-label "><strong>{% trans "Nechta:" %}</strong></label>
-                    <input readonly id="quantity" class="form-select" name="quantity" type="number" max="100" min="1"
+                    <input readonly id="quantity" class="form-select" name="quantity" type="number" max="{{ max_quantity }}" min="1"
                            value="{{ order.quantity }}">
 
                 </div>

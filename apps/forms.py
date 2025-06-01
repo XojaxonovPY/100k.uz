@@ -2,8 +2,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
 from django.forms import CharField, Form
 from django.forms.models import ModelForm
-
-from apps.models import User, Payment, Order
+from apps.models import User, Payment, Order, Product
 
 
 class EmailForm(Form):
