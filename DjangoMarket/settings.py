@@ -86,13 +86,6 @@ Login_REDIRECT_URL = 'login'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': getenv('DB_DJANGO'),
@@ -156,8 +149,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = getenv('EMAIL')
 EMAIL_HOST_PASSWORD = getenv('PASSWORD')
 EMAIL_USE_SSL = False
-
-# CKEditor Settings
 
 
 # ===========================================================ckeditor
