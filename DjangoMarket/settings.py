@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-ge=p1&9her-cu2g-$cjamgg_3y$rvdpk!(6gz8z5(yrubzrt2_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,7 +94,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -126,17 +126,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [join(BASE_DIR, 'static')]
+STATIC_ROOT = join(BASE_DIR, 'apps', 'static')
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # =============================================send-email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -146,7 +148,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = getenv('EMAIL')
 EMAIL_HOST_PASSWORD = getenv('PASSWORD')
 EMAIL_USE_SSL = False
-
 
 # ===========================================================ckeditor
 CKEDITOR_UPLOAD_PATH = 'uploads/'
