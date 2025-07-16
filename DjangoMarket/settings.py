@@ -178,8 +178,10 @@ CELERY_CACHE_BACKEND = 'default'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'UserCache',
     }
 }
+
 CELERY_BROKER_URL = getenv("REDIS_URL")
 
 
