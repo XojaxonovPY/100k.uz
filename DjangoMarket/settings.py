@@ -187,7 +187,7 @@ CELERY_BROKER_URL = getenv("REDIS_URL")
 
 redis = redis.Redis(
     host=getenv("REDIS_HOST"),
-    port=getenv("REDIS_PORT"),
+    port=int(getenv("REDIS_PORT")),
     username=getenv("REDIS_USER"),
     password=getenv("REDIS_PASS"),
     decode_responses=True
