@@ -6,8 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView
-from redis import Redis
-from DjangoMarket.settings import EMAIL_HOST_USER
+from DjangoMarket.settings import EMAIL_HOST_USER, redis as Redis
 from apps.forms import LoginForm, EmailForm
 from apps.models import User
 from apps.tasks import send_email
@@ -23,7 +22,7 @@ class SendEmailForm(FormView):
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
         code = random.randrange(10 ** 5, 10 ** 6)
-        redis = Redis()
+        redis = Redis
         redis.set(email, code)
         send_email.delay(
             subject="Verification Code !!!",
@@ -50,7 +49,7 @@ class RegisterView(View):
             user = query.first()
             login(request, user)
             return redirect('main')
-        redis = Redis(decode_responses=True)
+        redis = Redis
         check_code = redis.get(email)
         if not check_code or str(check_code) != str(code):
             messages.error(request, 'Kod hatto!')

@@ -185,7 +185,7 @@ CACHES = {
 
 CELERY_BROKER_URL = getenv("REDIS_URL")
 
-r = redis.Redis(
+redis = redis.Redis(
     host=getenv("REDIS_HOST"),
     port=getenv("REDIS_PORT"),
     username=getenv("REDIS_USER"),
