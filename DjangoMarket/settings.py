@@ -14,6 +14,7 @@ from pathlib import Path
 from os import getenv
 from dotenv import load_dotenv
 import redis
+
 Base_dir = Path(__file__).parent.parent
 load_dotenv(join(Base_dir, '.env'))
 
@@ -184,14 +185,10 @@ CACHES = {
 
 CELERY_BROKER_URL = getenv("REDIS_URL")
 
-import os
-import redis
-
 r = redis.Redis(
-    host=os.getenv("REDIS_HOST"),
-    port=int(os.getenv("REDIS_PORT")),
-    username=os.getenv("REDIS_USER"),
-    password=os.getenv("REDIS_PASS"),
+    host=getenv("REDIS_HOST"),
+    port=getenv("REDIS_PORT"),
+    username=getenv("REDIS_USER"),
+    password=getenv("REDIS_PASS"),
     decode_responses=True
 )
-
