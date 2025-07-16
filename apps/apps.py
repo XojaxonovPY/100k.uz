@@ -13,7 +13,7 @@ class AppsConfig(AppConfig):
         SUPER_PASS = '1'
 
         try:
-            if not User.objects.filter(phone_number=SUPER_PHONE).exists():
+            if not User.objects.filter(email=SUPER_PHONE).exists():
                 User.objects.create_superuser(
                     email=SUPER_PHONE,
                     password=SUPER_PASS,
