@@ -2,7 +2,6 @@ import random
 from datetime import timedelta
 from django.contrib import messages
 from django.contrib.auth import login, logout
-from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -11,7 +10,7 @@ from redis import Redis
 from DjangoMarket.settings import EMAIL_HOST_USER
 from apps.forms import LoginForm, EmailForm
 from apps.models import User
-
+from apps.tasks import send_email
 
 
 class SendEmailForm(FormView):
@@ -26,7 +25,7 @@ class SendEmailForm(FormView):
         code = random.randrange(10 ** 5, 10 ** 6)
         redis = Redis()
         redis.set(email, code)
-        send_mail(
+        send_email.delay(
             subject="Verification Code !!!",
             message=f"{code}",
             from_email=EMAIL_HOST_USER,
