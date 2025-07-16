@@ -44,10 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     # <------my app--------->
     'apps',
-    'ckeditor',
-    'parler',
-    'django_celery_results',
-    'django_celery_beat'
+    # 'ckeditor',
+    # 'parler',
+    # 'django_celery_results',
+    # 'django_celery_beat'
 ]
 
 MIDDLEWARE = [
