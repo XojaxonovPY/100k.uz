@@ -165,19 +165,19 @@ CKEDITOR_CONFIGS = {
 }
 # ===========================================================celery
 
-CELERY_TIMEZONE = "Asia/Tashkent"
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
-
-CELERY_RESULT_BACKEND = 'django-db'
-
-# pick which cache from the CACHES setting.
-CELERY_CACHE_BACKEND = 'default'
-
-# django setting.
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-    }
-}
-CELERY_BROKER_URL = 'redis://localhost:6379/1'
+# CELERY_TIMEZONE = "Asia/Tashkent"
+# CELERY_TASK_TRACK_STARTED = True
+# CELERY_TASK_TIME_LIMIT = 30 * 60
+#
+# CELERY_RESULT_BACKEND = 'django-db'
+#
+# # pick which cache from the CACHES setting.
+# CELERY_CACHE_BACKEND = 'default'
+#
+# # django setting.
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#     }
+# }
+# CELERY_BROKER_URL = 'redis://localhost:6379/1'
