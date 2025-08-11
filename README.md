@@ -4,7 +4,7 @@
 
 **💼 100k.uz** - bu Django va Jinja2 shablonlari yordamida ishlab chiqilgan mustaqil ish platformasi. 
 Bu foydalanuvchilarga frilanser ish joylarini joylashtirish, ularga ariza berish va ish jarayonlarini boshqarish imkonini beradi. 
-Platforma fon vazifalari uchun Seldereydan va ma'lumotlar bazasi sifatida PostgreSQL-dan foydalanadi va[100.uz](https://100k.uz/) sayti asosida yaratigan .
+Platforma fon vazifalari uchun Seldereydan va ma'lumotlar bazasi sifatida PostgreSQL-dan foydalanadi va [100.uz](https://100k.uz/) sayti asosida yaratigan .
 
 ## ⚙️ Asosiy xususiyatlar
 
