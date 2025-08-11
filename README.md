@@ -23,6 +23,8 @@ Platforma fon vazifalari uchun Seldereydan va ma'lumotlar bazasi sifatida Postgr
 | PostgreSQL   | Ma’lumotlar bazasi                                                   |
 | Docker       | Konteynerizatsiya                                                    |
 | Frontend     | HTML, CSS, JavaScript va frontend freymvorklar yordamida ishlanadi   |
+| Redis        | Kesh va xabar brokeri                                                |
+| Celery       | Fon vazifalarni asinxron bajarish va periodik ishla                  |
 
 ## 🛠️ O'rnatish va ishga tushirish
 
