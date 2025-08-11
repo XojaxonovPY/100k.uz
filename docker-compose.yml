@@ -1,0 +1,49 @@
+version: '3.8'
+
+
+services:
+  web:
+    build: .
+    image: 100k.uz
+    container_name: 100.uz_con
+    restart: always
+    command: "sh -c '
+    python manage.py makemigrations && 
+    python manage.py migrate && 
+    python manage.py runserver 0.0.0.0:8012'"
+    ports:
+      - '8012:8012'
+    depends_on:
+      - db
+
+  db:
+    image: postgres:alpine
+    container_name: pg6
+    restart: always
+    ports:
+      - '5437:5432'
+    environment:
+      POSTGRES_PASSWORD: 1
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  celery:
+    build: .
+    image: market_celery
+    container_name: market_celery_con
+    command: [ "celery", "-A", "root", "worker", "--loglevel=info" ]
+    depends_on:
+      - rd
+  rd:
+    image: redis:alpine
+    container_name: rd7
+    ports:
+      - "6385:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  pg_data:
+  rb_data:
+  redis_data:
+
