@@ -1,4 +1,4 @@
-# 🏆 💼 100k.uz
+# 💼 100k.uz
 
 ## 📌 Loyihaning qisqacha tavsifi
 
