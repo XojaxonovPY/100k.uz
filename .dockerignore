@@ -3,4 +3,4 @@
 .env_copy
 Procfile
 .gitignore
-media/*
+apps/migrations/*

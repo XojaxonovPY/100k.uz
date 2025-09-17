@@ -89,10 +89,10 @@ Login_REDIRECT_URL = 'login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': getenv('DB_NAME'),
+        'NAME': getenv('DB_DK_NAME'),
         'USER': getenv('DB_USER'),
         'PASSWORD': getenv('DB_PASSWORD'),
-        'HOST': getenv('DB_HOST'),
+        'HOST': getenv('DB_DK_HOST'),
         'PORT': getenv('DB_PORT'),
     }
 }
@@ -185,6 +185,6 @@ CACHES = {
     }
 }
 
-CELERY_BROKER_URL = getenv("REDIS_URL")
+CELERY_BROKER_URL = getenv("REDIS_DK_URL")
 
-redis = redis.Redis.from_url(url=getenv('REDIS_URL'),decode_responses=True)
+redis = redis.Redis.from_url(url=getenv('REDIS_DK_URL'), decode_responses=True)
