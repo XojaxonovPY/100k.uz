@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 import redis
 
 Base_dir = Path(__file__).parent.parent
-load_dotenv(join(Base_dir, '.env'))
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,7 +80,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'DjangoMarket.wsgi.application'
-# AUTH_USER_MODEL = 'main.User'
 Login_URL = 'login'
 Login_REDIRECT_URL = 'login'
 
