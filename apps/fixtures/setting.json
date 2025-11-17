@@ -3,7 +3,7 @@
     "model": "apps.settings",
     "pk": 1,
     "fields": {
-      "phone_number": "+998(95) 679-04-08",
+      "phone_number": "+998(95) 122-22-32",
       "tg_ling": "https://t.me/Gorinhas",
       "tg_bot": "@lesson_1_project_bot",
       "ling_bot": "https://t.me/lesson_1_project_bot",
