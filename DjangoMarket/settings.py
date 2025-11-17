@@ -180,6 +180,6 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'default'
 
 
-CELERY_BROKER_URL = getenv("REDIS_DK_URL")
+# CELERY_BROKER_URL = getenv("REDIS_DK_URL")
 
-redis = redis.Redis.from_url(url=getenv('REDIS_DK_URL'), decode_responses=True)
+# redis = redis.Redis.from_url(url=getenv('REDIS_DK_URL'), decode_responses=True)
