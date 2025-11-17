@@ -1,12 +1,14 @@
 import random
-from datetime import timedelta
+
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.core.cache import cache
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView
-from DjangoMarket.settings import EMAIL_HOST_USER, redis
+
+from DjangoMarket.settings import EMAIL_HOST_USER
 from apps.forms import LoginForm, EmailForm
 from apps.models import User
 from apps.tasks import send_email
@@ -22,15 +24,14 @@ class SendEmailForm(FormView):
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
         code = random.randrange(10 ** 5, 10 ** 6)
-        redis.set(email, code)
-        send_email.delay(
+        cache.set(email, code,timeout=300)
+        send_email(
             subject="Verification Code !!!",
             message=f"{code}",
             from_email=EMAIL_HOST_USER,
             recipient_list=[email],
             fail_silently=False
         )
-        redis.expire(email, time=timedelta(2))
         return render(self.request, 'login-register/register.html', context={'email': email})
 
     def form_invalid(self, form):
@@ -48,7 +49,7 @@ class RegisterView(View):
             user = query.first()
             login(request, user)
             return redirect('main')
-        check_code = redis.get(email)
+        check_code = cache.get(email)
         if not check_code or str(check_code) != str(code):
             messages.error(request, 'Kod hatto!')
         users = User.objects.create_user(email=email)

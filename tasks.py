@@ -23,12 +23,12 @@ def apps(c):
 
 @task
 def load(c):
-    c.run("python manage.py loaddata products.json categories.json disdricts.json images.json regions.json sellers.json tags.json options.json attrs.json settings.json")
+    c.run("python manage.py loaddata product.json category.json district.json image.json region.json seller.json tag.json option.json attr.json setting.json product_tag.json")
 
 
 @task
 def dump(c):
-    c.run("python manage.py dumpdata apps.ProductImage > images.json")
+    c.run("python manage.py dumpdata apps.User > user.json")
 
 
 @task
