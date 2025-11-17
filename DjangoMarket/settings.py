@@ -88,12 +88,8 @@ Login_REDIRECT_URL = 'login'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': getenv('DB_DK_NAME'),
-        'USER': getenv('DB_USER'),
-        'PASSWORD': getenv('DB_PASSWORD'),
-        'HOST': getenv('DB_DK_HOST'),
-        'PORT': getenv('DB_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -143,6 +139,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "cache",
+    }
+}
 # =============================================send-email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -177,13 +179,6 @@ CELERY_RESULT_BACKEND = 'django-db'
 # pick which cache from the CACHES setting.
 CELERY_CACHE_BACKEND = 'default'
 
-# django setting.
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'UserCache',
-    }
-}
 
 CELERY_BROKER_URL = getenv("REDIS_DK_URL")
 

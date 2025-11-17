@@ -1,5 +1,5 @@
 .venv
 .idea
-media
-apps/migrations/*
 .env
+db.sqlite3
+media/product/video_2025-05-09_17-32-13.mp4
