@@ -23,7 +23,8 @@ def apps(c):
 
 @task
 def load(c):
-    c.run("python manage.py loaddata product.json category.json district.json image.json region.json seller.json tag.json option.json attr.json setting.json product_tag.json")
+    c.run(
+        "python manage.py loaddata product.json category.json district.json image.json region.json seller.json tag.json option.json attr.json setting.json product_tag.json user.json")
 
 
 @task
@@ -33,14 +34,14 @@ def dump(c):
 
 @task
 def celery(c):
-    c.run("celery -A DjangoMarket worker --pool=solo -l info")
+    c.run("celery -A root worker --pool=solo -l info")
 
 
 @task
 def flower(c):
-    c.run("celery -A DjangoMarket flower")
+    c.run("celery -A root flower")
 
 
 @task
 def beat(c):
-    c.run("celery -A DjangoMarket beat -l info -S django")
+    c.run("celery -A root beat -l info -S django")

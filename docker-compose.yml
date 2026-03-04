@@ -29,7 +29,7 @@ services:
     build: .
     image: 100k.celery
     container_name: 100k.celery_con
-    command: [ "celery", "-A", "DjangoMarket", "worker", "--loglevel=info" ]
+    command: [ "celery", "-A", "root", "worker", "--loglevel=info" ]
     depends_on:
       - rd
 

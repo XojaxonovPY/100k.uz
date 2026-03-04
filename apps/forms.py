@@ -2,7 +2,13 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
 from django.forms import CharField, Form
 from django.forms.models import ModelForm
-from apps.models import User, Payment, Order, Product
+
+from apps.models import User, Payment, Order
+
+
+class RegisterForm(Form):
+    email = CharField(max_length=100, required=True)
+    code = CharField(max_length=15, required=True)
 
 
 class EmailForm(Form):
@@ -10,6 +16,9 @@ class EmailForm(Form):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
+        user_obj = User.objects.filter(email=email)
+        if user_obj.exists():
+            raise ValidationError(message='Email already exists')
         return email
 
 
@@ -22,10 +31,10 @@ class LoginForm(Form):
         password = self.cleaned_data.get('password')
         query = User.objects.filter(email=email)
         if not query.exists():
-            raise ValidationError(f'{email} exists')
+            raise ValidationError(message='This email does not exist', code='user_not_exist')
         user = query.first()
         if not check_password(password, user.password):
-            raise ValidationError('Password error')
+            raise ValidationError(message='Password error', code='password_error')
         self.user = user
         return super().clean()
 
