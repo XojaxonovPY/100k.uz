@@ -11,7 +11,6 @@ from django.views.generic import FormView
 from apps.forms import LoginForm, EmailForm, RegisterForm
 from apps.models import User
 from apps.tasks import send_email
-from root.settings import EMAIL_HOST_USER
 
 
 class SendEmailForm(FormView):
@@ -25,13 +24,7 @@ class SendEmailForm(FormView):
         email: str = form.cleaned_data.get('email')
         code: str = str(random.randrange(10 ** 5, 10 ** 6))
         cache.set(email, code, timeout=300)
-        send_email(
-            subject="Verification Code !!!",
-            message=code,
-            from_email=EMAIL_HOST_USER,
-            recipient_list=[email],
-            fail_silently=False
-        )
+        send_email.delay(message=code, recipient_list=[email])
         return render(self.request, 'auth/register.html', context={'email': email, 'code': code})
 
     def form_invalid(self, form):
