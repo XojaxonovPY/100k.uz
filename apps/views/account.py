@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, UpdateView
+
 from apps.forms import UserModelForm, PasswordForm, PhoneNumberForm
 from apps.models import User, Region, District
 
@@ -28,6 +30,12 @@ class PasswordUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'settings/password.html'
     success_url = reverse_lazy('login')
     pk_url_kwarg = 'pk'
+
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, error)
+        return super().form_invalid(form)
 
 
 class PhoneNumberUpdateView(LoginRequiredMixin, UpdateView):

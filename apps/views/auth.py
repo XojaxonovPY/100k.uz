@@ -11,7 +11,6 @@ from django.views.generic import FormView
 from apps.forms import LoginForm, EmailForm, RegisterForm
 from apps.models import User
 from apps.tasks import send_email
-from root.settings import EMAIL_HOST_USER
 
 
 class SendEmailForm(FormView):
@@ -26,11 +25,8 @@ class SendEmailForm(FormView):
         code: str = str(random.randrange(10 ** 5, 10 ** 6))
         cache.set(email, code, timeout=300)
         send_email(
-            subject="Verification Code !!!",
             message=code,
-            from_email=EMAIL_HOST_USER,
             recipient_list=[email],
-            fail_silently=False
         )
         return render(self.request, 'auth/register.html', context={'email': email, 'code': code})
 
@@ -44,6 +40,7 @@ class SendEmailForm(FormView):
 class RegisterView(FormView):
     template_name = 'auth/register.html'
     form_class = RegisterForm
+    success_url = reverse_lazy('main')
 
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
@@ -54,7 +51,7 @@ class RegisterView(FormView):
             return redirect('register')
         users = User.objects.create_user(email=email)
         login(self.request, users)
-        return redirect('main')
+        return super().form_valid(form)
 
     def form_invalid(self, form):
         for field, errors in form.errors.items():

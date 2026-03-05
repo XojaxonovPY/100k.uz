@@ -1,6 +1,6 @@
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
-from django.forms import CharField, Form
+from django.forms import CharField, Form, IntegerField
 from django.forms.models import ModelForm
 
 from apps.models import User, Payment, Order
@@ -86,6 +86,18 @@ class PaymentModelForm(ModelForm):
         if not card_number.isdigit():
             raise ValidationError('Card number error')
         return card_number
+
+
+class OrderForm(Form):
+    name = CharField(max_length=125, required=True)
+    product_id = CharField(max_length=125, required=True)
+    phone_number = CharField(max_length=125, required=True)
+    region = IntegerField(required=False)
+    owner = IntegerField(required=False)
+    thread = IntegerField(required=False)
+
+
+
 
 
 class OrderModelForm(ModelForm):
