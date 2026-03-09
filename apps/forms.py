@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
 from django.forms import CharField, Form, IntegerField
@@ -67,6 +69,11 @@ class PhoneNumberForm(ModelForm):
         model = User
         fields = ('phone_number',)
 
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        clean_number = re.sub(r'\D', '', phone_number)
+        return clean_number
+
 
 class PaymentModelForm(ModelForm):
     class Meta:
@@ -96,8 +103,10 @@ class OrderForm(Form):
     owner = IntegerField(required=False)
     thread = IntegerField(required=False)
 
-
-
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        clean_number = re.sub(r'\D', '', phone_number)
+        return clean_number
 
 
 class OrderModelForm(ModelForm):

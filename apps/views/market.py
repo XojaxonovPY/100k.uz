@@ -2,7 +2,7 @@ from typing import Any
 
 from django.contrib import messages
 from django.db import IntegrityError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
@@ -23,7 +23,7 @@ class HomeListView(ListView):
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(*args, **kwargs)
         data['categories'] = Category.objects.all()
-        data['orders'] = Product.objects.filter(order_count__gt=0)[:8]
+        data['orders'] = Product.objects.filter(order_count__gt=0).order_by('-order_count')[:8]
         data['settings'] = Settings.objects.first()
         return data
 
@@ -96,7 +96,7 @@ class AboutTemplateView(TemplateView):
 
 # =======================================================Order
 class OrderView(View):
-    def post(self, request) -> HttpResponse:
+    def post(self, request: HttpRequest) -> HttpResponse:
         form = OrderForm(request.POST)
         admin = Settings.objects.first()
         products = Product.objects.all()[:16]
@@ -119,8 +119,7 @@ class OrderView(View):
                     total=total_price
                 )
                 context['order'] = order
-                context['product'] = product
-                messages.success(request, "Buyurtma qabul qilindi!")
+                context['product_item'] = product
                 return render(request, 'market/order.html', context=context)
             except IntegrityError:
                 messages.error(request, "Ma'lumotlar bazasida xatolik (duplikatsiya bo'lishi mumkin).")
