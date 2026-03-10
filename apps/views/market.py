@@ -1,7 +1,13 @@
+from typing import Any
+
+from django.contrib import messages
+from django.db import IntegrityError
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
 
+from apps.forms import OrderForm
 from apps.models import Product, Category, Settings, Region, Order, Attribute
 
 
@@ -17,9 +23,8 @@ class HomeListView(ListView):
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(*args, **kwargs)
         data['categories'] = Category.objects.all()
-        data['orders'] = Product.objects.filter(order_count__gt=0)[:8]
+        data['orders'] = Product.objects.filter(order_count__gt=0).order_by('-order_count')[:8]
         data['settings'] = Settings.objects.first()
-
         return data
 
 
@@ -55,11 +60,10 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
     pk_url_kwarg = 'pk'
 
-
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        products=self.get_object(self.queryset)
-        products.visit_count+=1
+        products = self.get_object(self.queryset)
+        products.visit_count += 1
         products.save()
         data['attribute'] = Attribute.objects.filter(products=self.get_object(self.queryset)).all()
         data['regions'] = Region.objects.all()
@@ -92,22 +96,35 @@ class AboutTemplateView(TemplateView):
 
 # =======================================================Order
 class OrderView(View):
-    def post(self, request):
-        order = {
-            'name': request.POST.get('name'),
-            'product_id': request.POST.get('product_id'),
-            'phone_number': request.POST.get('phone_number'),
-            'region_id': request.POST.get('region'),
-            'owner_id': request.POST.get('owner'),
-            'stream_id': request.POST.get('thread'),
-        }
+    def post(self, request: HttpRequest) -> HttpResponse:
+        form = OrderForm(request.POST)
         admin = Settings.objects.first()
         products = Product.objects.all()[:16]
-        product = Product.objects.filter(pk=order['product_id']).first()
-        order['total'] = float(product.discount_price) + float(admin.delivery_price)
-        Order.objects.create(**order)
-        context = {'order': order, 'products': products, 'product_item': product, 'admin': admin}
+        context: dict[str, Any] = {'products': products, 'admin': admin}
+        if form.is_valid():
+            data = form.cleaned_data
+            product = Product.objects.filter(pk=data.get('product_id')).first()
+            if not product:
+                messages.error(request, "Mahsulot topilmadi!")
+                return render(request, 'market/order.html', context=context)
+            total_price = float(product.discount_price or 0) + float(admin.delivery_price or 0)
+            try:
+                order = Order.objects.create(
+                    name=data.get('name'),
+                    product_id=product.id,
+                    phone_number=data.get('phone_number'),
+                    region_id=data.get('region'),
+                    owner_id=data.get('owner'),
+                    stream_id=data.get('thread'),
+                    total=total_price
+                )
+                context['order'] = order
+                context['product_item'] = product
+                return render(request, 'market/order.html', context=context)
+            except IntegrityError:
+                messages.error(request, "Ma'lumotlar bazasida xatolik (duplikatsiya bo'lishi mumkin).")
+            except Exception as e:
+                messages.error(request, f"Kutilmagan xatolik: {str(e)}")
+        else:
+            messages.error(request, 'Iltimos, shaklni to\'g\'ri to\'ldiring.')
         return render(request, 'market/order.html', context=context)
-
-
-

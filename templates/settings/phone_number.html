@@ -9,7 +9,7 @@
             <form id="phoneForm" action="{% url 'number' request.user.pk %}" method="post">
                 {% csrf_token %}
                 <input type="text" name="phone_number" id="phoneNumber" placeholder="+998 (XX) XXX-XX-XX" required>
-                <button type="submit">Kodini olish</button>
+                <button type="submit">Telefon raqamni saqlash</button>
             </form>
         </div>
     </div>

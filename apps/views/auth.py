@@ -24,6 +24,10 @@ class SendEmailForm(FormView):
         email: str = form.cleaned_data.get('email')
         code: str = str(random.randrange(10 ** 5, 10 ** 6))
         cache.set(email, code, timeout=300)
+        send_email(
+            message=code,
+            recipient_list=[email],
+        )
         send_email.delay(message=code, recipient_list=[email])
         return render(self.request, 'auth/register.html', context={'email': email, 'code': code})
 
@@ -37,6 +41,7 @@ class SendEmailForm(FormView):
 class RegisterView(FormView):
     template_name = 'auth/register.html'
     form_class = RegisterForm
+    success_url = reverse_lazy('main')
 
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
@@ -47,7 +52,7 @@ class RegisterView(FormView):
             return redirect('register')
         users = User.objects.create_user(email=email)
         login(self.request, users)
-        return redirect('main')
+        return super().form_valid(form)
 
     def form_invalid(self, form):
         for field, errors in form.errors.items():

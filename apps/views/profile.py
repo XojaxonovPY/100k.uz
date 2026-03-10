@@ -1,16 +1,19 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q, Count, Sum
+from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, TemplateView, DetailView, CreateView
-from apps.forms import PaymentModelForm
-from apps.models import Product, Category, Settings, Region, News, Tag, Seller, Stream, Order, Charity, Penalty
+from django.views.generic import DetailView, CreateView, DeleteView
+
+from apps.forms import PaymentModelForm, StreamModelForm
+from apps.mixin_views import BaseTemplateView, BaseListView
 from apps.models import Payment, Transaction
+from apps.models import Product, Category, Settings, Region, News, Tag, Seller, Stream, Order, Charity, Penalty
 
 
-class MainTemplateView(LoginRequiredMixin, TemplateView):
+class MainTemplateView(BaseTemplateView):
     template_name = 'profile/main.html'
     login_url = 'login'
 
@@ -21,7 +24,7 @@ class MainTemplateView(LoginRequiredMixin, TemplateView):
         return data
 
 
-class NewsTemplateView(LoginRequiredMixin, TemplateView):
+class NewsTemplateView(BaseTemplateView):
     template_name = 'profile/news.html'
 
     def get_context_data(self, **kwargs):
@@ -30,7 +33,7 @@ class NewsTemplateView(LoginRequiredMixin, TemplateView):
         return data
 
 
-class MarketListView(LoginRequiredMixin, ListView):
+class MarketListView(BaseListView):
     queryset = Product.objects.all()
     template_name = 'profile/market.html'
     context_object_name = 'products'
@@ -54,11 +57,11 @@ class MarketListView(LoginRequiredMixin, ListView):
         data['categories'] = Category.objects.all()
         data['tags'] = Tag.objects.all()
         data['sellers'] = Seller.objects.all()
-        data['admin']=Settings.objects.get()
+        data['admin'] = Settings.objects.get()
         return data
 
 
-class StreamListView(LoginRequiredMixin, ListView):
+class StreamListView(BaseListView):
     queryset = Stream.objects.all()
     context_object_name = 'streams'
     template_name = 'profile/stream.html'
@@ -69,7 +72,7 @@ class StreamListView(LoginRequiredMixin, ListView):
         return query
 
 
-class StatisticTemplateView(LoginRequiredMixin, ListView):
+class StatisticTemplateView(BaseListView):
     queryset = Stream.objects.all()
     template_name = 'profile/statistic.html'
     context_object_name = 'streams'
@@ -105,7 +108,7 @@ class StatisticTemplateView(LoginRequiredMixin, ListView):
         return data
 
 
-class PenaltyListView(LoginRequiredMixin, ListView):
+class PenaltyListView(BaseListView):
     queryset = Penalty.objects.all()
     template_name = 'profile/penalty.html'
     context_object_name = 'penalties'
@@ -116,7 +119,7 @@ class PenaltyListView(LoginRequiredMixin, ListView):
         return query
 
 
-class DonatListView(LoginRequiredMixin, ListView):
+class DonatListView(BaseListView):
     queryset = Charity.objects.all()
     template_name = 'profile/donat.html'
     context_object_name = 'donations'
@@ -128,7 +131,7 @@ class DonatListView(LoginRequiredMixin, ListView):
         return data
 
 
-class PaymentCreatView(LoginRequiredMixin,CreateView):
+class PaymentCreatView(LoginRequiredMixin, CreateView):
     queryset = Payment.objects.all()
     template_name = 'profile/payment.html'
     success_url = reverse_lazy('payment')
@@ -136,52 +139,55 @@ class PaymentCreatView(LoginRequiredMixin,CreateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        payment=Payment.objects.filter(user=self.request.user).order_by('-created_at')
+        payment = Payment.objects.filter(user=self.request.user).order_by('-created_at')
         data['payments'] = payment
-        data['amount']=payment.order_by('-created_at').first().amount if payment else 0
+        data['amount'] = payment.order_by('-created_at').first().amount if payment else 0
 
         return data
 
     def form_valid(self, form):
-        amount=form.cleaned_data.get('amount')
-        Transaction.objects.create(type='-',amount=amount,message='Pul yechildi',user=self.request.user)
+        amount = form.cleaned_data.get('amount')
+        Transaction.objects.create(type='-', amount=amount, message='Pul yechildi', user=self.request.user)
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        for i in form.errors:
-            messages.error(self.request, i)
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, error)
         return super().form_invalid(form)
 
 
-class RequestsListView(LoginRequiredMixin, ListView):
+class RequestsListView(BaseListView):
     queryset = Order.objects.all()
     context_object_name = 'requests'
     template_name = 'profile/requests.html'
 
     def get_queryset(self):
-        query=super().get_queryset()
-        query=query.filter(stream__user=self.request.user)
+        query = super().get_queryset()
+        query = query.filter(stream__user=self.request.user)
         return query
 
     def get_context_data(self, *args, **kwargs):
-        data=super().get_context_data(*args, **kwargs)
-        data['status']=Order.StatusType.values
+        data = super().get_context_data(*args, **kwargs)
+        data['status'] = Order.StatusType.values
         return data
 
-class BalanceListView(LoginRequiredMixin, ListView):
+
+class BalanceListView(BaseListView):
     queryset = Transaction.objects.all()
     template_name = 'profile/balance.html'
     context_object_name = 'transactions'
 
     def get_queryset(self):
         query = super().get_queryset()
-        query=query.filter(user=self.request.user)
-        status=self.request.GET.get('status')
+        query = query.filter(user=self.request.user)
+        status = self.request.GET.get('status')
         if status:
-            query=query.filter(status=status)
+            query = query.filter(status=status)
         return query
 
-def chart_view(request):
+
+def chart_view(request: HttpRequest):
     orders = Order.objects.filter(owner=request.user).order_by('region')
     labels = list(orders.values_list('region__name', flat=True))
     data = list(orders.values_list('region__order_count', flat=True))
@@ -206,10 +212,24 @@ class StreamView(View):
         return redirect('stream')
 
 
-class StreamDeleteView(View):
-    def get(self, request, pk):
-        Stream.objects.filter(pk=pk).delete()
-        return redirect('stream')
+class StreamCreateView(CreateView):
+    model = Stream
+    form_class = StreamModelForm
+    template_name = 'profile/market.html'
+    success_url = reverse_lazy('stream')
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        instance.save()
+        return super().form_valid(form)
+
+
+class StreamDeleteView(DeleteView):
+    model = Stream
+    success_url = reverse_lazy('stream')
+    template_name = 'profile/stream.html'
+    pk_url_kwarg = 'pk'
 
 
 class StreamDetailView(DetailView):
@@ -230,4 +250,3 @@ class StreamDetailView(DetailView):
         data['regions'] = Region.objects.all()
         data['admin'] = Settings.objects.first()
         return data
-

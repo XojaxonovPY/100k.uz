@@ -1,12 +1,13 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
+from django.contrib import messages
+from django.http import JsonResponse, HttpRequest
 from django.urls import reverse_lazy, reverse
-from django.views.generic import TemplateView, UpdateView
+
 from apps.forms import UserModelForm, PasswordForm, PhoneNumberForm
+from apps.mixin_views import BaseUpdateView, BaseTemplateView
 from apps.models import User, Region, District
 
 
-class AccountUpdateView(LoginRequiredMixin, UpdateView):
+class AccountUpdateView(BaseUpdateView):
     queryset = User.objects.all()
     form_class = UserModelForm
     template_name = 'settings/account.html'
@@ -22,15 +23,21 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
         return data
 
 
-class PasswordUpdateView(LoginRequiredMixin, UpdateView):
+class PasswordUpdateView(BaseUpdateView):
     queryset = User.objects.all()
     form_class = PasswordForm
     template_name = 'settings/password.html'
     success_url = reverse_lazy('login')
     pk_url_kwarg = 'pk'
 
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, error)
+        return super().form_invalid(form)
 
-class PhoneNumberUpdateView(LoginRequiredMixin, UpdateView):
+
+class PhoneNumberUpdateView(BaseUpdateView):
     queryset = User.objects.all()
     template_name = 'settings/phone_number.html'
     form_class = PhoneNumberForm
@@ -38,15 +45,15 @@ class PhoneNumberUpdateView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'pk'
 
 
-class TelegramTemplateView(LoginRequiredMixin, TemplateView):
+class TelegramTemplateView(BaseTemplateView):
     template_name = 'settings/telegram.html'
 
 
-class FacebookTemplateView(LoginRequiredMixin, TemplateView):
+class FacebookTemplateView(BaseTemplateView):
     template_name = 'settings/facebook.html'
 
 
-def district_list(request):
+def district_list(request: HttpRequest) -> JsonResponse:
     region_id = request.GET.get("region_id")
     districts = District.objects.filter(region_id=region_id)
     data = [{"id": i.pk, "name": i.name} for i in districts]

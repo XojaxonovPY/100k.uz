@@ -368,7 +368,7 @@
                     </select>
                 </form>
 
-                <form method="post" action="{% url 'search' %}" class="filter-row" style="flex: 1; margin-bottom: 0;">
+                <form method="post" action="{% url 'search-market' %}" class="filter-row" style="flex: 1; margin-bottom: 0;">
                     {% csrf_token %}
                     <input type="text" class="search-input" name="name" placeholder="Izlash...">
                     <button type="submit" class="search-btn">Izlash</button>

@@ -1,9 +1,11 @@
+import re
+
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
-from django.forms import CharField, Form
+from django.forms import CharField, Form, IntegerField
 from django.forms.models import ModelForm
 
-from apps.models import User, Payment, Order
+from apps.models import User, Payment, Order, Stream
 
 
 class RegisterForm(Form):
@@ -67,6 +69,11 @@ class PhoneNumberForm(ModelForm):
         model = User
         fields = ('phone_number',)
 
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        clean_number = re.sub(r'\D', '', phone_number)
+        return clean_number
+
 
 class PaymentModelForm(ModelForm):
     class Meta:
@@ -83,9 +90,23 @@ class PaymentModelForm(ModelForm):
 
     def clean_card_number(self):
         card_number = self.cleaned_data.get('card_number')
-        if not card_number.isdigit():
+        if not card_number.isdigit() and len(card_number) <= 16:
             raise ValidationError('Card number error')
         return card_number
+
+
+class OrderForm(Form):
+    name = CharField(max_length=125, required=True)
+    product_id = CharField(max_length=125, required=True)
+    phone_number = CharField(max_length=125, required=True)
+    region = IntegerField(required=False)
+    owner = IntegerField(required=False)
+    thread = IntegerField(required=False)
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        clean_number = re.sub(r'\D', '', phone_number)
+        return clean_number
 
 
 class OrderModelForm(ModelForm):
@@ -96,3 +117,17 @@ class OrderModelForm(ModelForm):
     class Meta:
         model = Order
         fields = ('district', 'region', 'delivery_time', 'quantity', 'comment', 'status')
+
+
+class StreamModelForm(ModelForm):
+    class Meta:
+        model = Stream
+        fields = ('name', 'product', 'operator')
+
+    def clean_operator(self):
+        operator = self.cleaned_data.get('operator')
+        return operator == 'on'
+
+
+class SearchForm(Form):
+    name = CharField(max_length=125, required=True)
