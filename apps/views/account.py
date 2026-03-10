@@ -1,19 +1,10 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpRequest
 from django.urls import reverse_lazy, reverse
-from django.views.generic import TemplateView, UpdateView
 
 from apps.forms import UserModelForm, PasswordForm, PhoneNumberForm
+from apps.mixin_views import BaseUpdateView, BaseTemplateView
 from apps.models import User, Region, District
-
-
-class BaseUpdateView(LoginRequiredMixin, UpdateView):
-    pass
-
-
-class BaseTemplateView(LoginRequiredMixin, TemplateView):
-    pass
 
 
 class AccountUpdateView(BaseUpdateView):

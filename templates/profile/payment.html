@@ -102,19 +102,20 @@
 
 
     <div class="container">
-        {% if messages %}
-            {% for message in messages %}
-                <h5 style="color:red;">{{ message }}</h5>
-            {% endfor %}
-        {% endif %}
+
         <!-- Hisob paneli -->
         <div class="panel">
             <h3>Mening hisobim</h3>
-            <p>ID raqamingiz: <strong>6216673</strong></p>
+            <p>ID raqamingiz: <strong>{{ request.user.pk }}</strong></p>
             <hr>
             <p>Asosiy balansda: {{ request.user.balance }} so'm</p>
             <hr>
             <p>To'lab berildi: {{ amount }} so'm</p>
+            {% if messages %}
+                {% for message in messages %}
+                    <h5 style="color:red;">{{ message }}</h5>
+                {% endfor %}
+            {% endif %}
         </div>
 
         <!-- To'lov formasi -->

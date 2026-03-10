@@ -170,10 +170,13 @@
                     <div class="card-header">
                         <span class="badge">100%</span>
                         <span class="title">{{ stream.name }}</span>
-                        <a href="{% url 'delete-stream' stream.pk %}"><span class="delete">🗑️</span></a>
+                        <form action="{% url 'delete-stream' stream.pk %}" method="post">
+                            {% csrf_token %}
+                            <button class="delete">🗑️</button>
+                        </form>
                     </div>
                     <p class="desc">{{ stream.product.name }}</p>
-                    <input type="text" readonly value="{{ request.get_host }}/oqim/{{ stream.pk }}"
+                    <input type="text" readonly value="{{ request.get_host }}/stream/{{ stream.pk }}"
                            class="link"/>
                     <label><input type="checkbox"/> sorovlarni hududsiz qabul qilish</label>
                     {% if not stream.operator %}
@@ -188,7 +191,7 @@
                             </span>
                         </span>
                     </p>
-                    <p class="timestamp">{{ stream.created_at }}</p>
+                    <p class="timestamp">{{ stream.created_at|date }}</p>
                     <div class="actions">
                         <button class="copy-btn">Nusxa ko‘chirish</button>
                     </div>

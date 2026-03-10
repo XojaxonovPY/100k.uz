@@ -17,7 +17,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('stream/save', StreamView.as_view(), name='stream-save'),
-    path('oqim/<int:pk>', StreamDetailView.as_view(), name='thread'),
+    path('stream/save', StreamCreateView.as_view(), name='stream-save'),
+    path('stream/<int:pk>', StreamDetailView.as_view(), name='thread'),
     path('delete/stream/<int:pk>', StreamDeleteView.as_view(), name='delete-stream'),
 ]

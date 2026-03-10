@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.forms import CharField, Form, IntegerField
 from django.forms.models import ModelForm
 
-from apps.models import User, Payment, Order
+from apps.models import User, Payment, Order, Stream
 
 
 class RegisterForm(Form):
@@ -90,7 +90,7 @@ class PaymentModelForm(ModelForm):
 
     def clean_card_number(self):
         card_number = self.cleaned_data.get('card_number')
-        if not card_number.isdigit():
+        if not card_number.isdigit() and len(card_number) <= 16:
             raise ValidationError('Card number error')
         return card_number
 
@@ -117,3 +117,17 @@ class OrderModelForm(ModelForm):
     class Meta:
         model = Order
         fields = ('district', 'region', 'delivery_time', 'quantity', 'comment', 'status')
+
+
+class StreamModelForm(ModelForm):
+    class Meta:
+        model = Stream
+        fields = ('name', 'product', 'operator')
+
+    def clean_operator(self):
+        operator = self.cleaned_data.get('operator')
+        return operator == 'on'
+
+
+class SearchForm(Form):
+    name = CharField(max_length=125, required=True)

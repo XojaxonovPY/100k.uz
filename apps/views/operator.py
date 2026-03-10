@@ -7,7 +7,7 @@ from apps.forms import OrderModelForm
 from apps.models import Category, Region, Order, Transaction
 
 
-class OperatorTemplateView(ListView):
+class OperatorListView(ListView):
     queryset = Order.objects.order_by('-created_at').all()
     template_name = 'operator/operator-page.html'
     context_object_name = 'orders'
