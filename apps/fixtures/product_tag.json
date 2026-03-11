@@ -1,6 +1,6 @@
 [
   {
-    "model": "apps.producttag",
+    "model": "apps.product_tag",
     "pk": 1,
     "fields": {
       "tag": 7,
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "apps.producttag",
+    "model": "apps.product_tag",
     "pk": 2,
     "fields": {
       "tag": 4,
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "apps.producttag",
+    "model": "apps.product_tag",
     "pk": 3,
     "fields": {
       "tag": 2,
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "apps.producttag",
+    "model": "apps.product_tag",
     "pk": 4,
     "fields": {
       "tag": 18,

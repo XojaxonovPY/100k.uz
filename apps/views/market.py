@@ -8,7 +8,7 @@ from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
 
 from apps.forms import OrderForm
-from apps.models import Product, Category, Settings, Region, Order, Attribute
+from apps.models import Product, Category, Setting, Region, Order, Attribute
 
 
 class HomeListView(ListView):
@@ -24,7 +24,7 @@ class HomeListView(ListView):
         data = super().get_context_data(*args, **kwargs)
         data['categories'] = Category.objects.all()
         data['orders'] = Product.objects.filter(order_count__gt=0).order_by('-order_count')[:8]
-        data['settings'] = Settings.objects.first()
+        data['settings'] = Setting.objects.first()
         return data
 
 
@@ -67,7 +67,7 @@ class ProductDetailView(DetailView):
         products.save()
         data['attribute'] = Attribute.objects.filter(products=self.get_object(self.queryset)).all()
         data['regions'] = Region.objects.all()
-        data['admin'] = Settings.objects.first()
+        data['admin'] = Setting.objects.first()
         return data
 
 
@@ -86,7 +86,7 @@ class CommunicationTemplateView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['communications'] = Settings.objects.all()
+        data['communications'] = Setting.objects.all()
         return data
 
 
@@ -98,7 +98,7 @@ class AboutTemplateView(TemplateView):
 class OrderView(View):
     def post(self, request: HttpRequest) -> HttpResponse:
         form = OrderForm(request.POST)
-        admin = Settings.objects.first()
+        admin = Setting.objects.first()
         products = Product.objects.all()[:16]
         context: dict[str, Any] = {'products': products, 'admin': admin}
         if form.is_valid():

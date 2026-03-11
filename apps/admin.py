@@ -130,7 +130,7 @@ class StreamAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at',)
 
 
-@admin.register(Settings)
+@admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
     list_display = ('id', 'phone_number', 'tg_ling', 'tg_bot', 'delivery_price')
 
