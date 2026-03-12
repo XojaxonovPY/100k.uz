@@ -3,8 +3,9 @@
     "model": "apps.producttag",
     "pk": 1,
     "fields": {
-      "tag": 7,
-      "product": 1
+      "tag": 1,
+      "product": 7,
+      "created_at": "2025-11-17T13:58:37.806Z"
     }
   },
   {
@@ -12,23 +13,26 @@
     "pk": 2,
     "fields": {
       "tag": 4,
-      "product": 4
+      "product": 4,
+      "created_at": "2025-11-17T13:58:37.806Z"
     }
   },
   {
     "model": "apps.producttag",
     "pk": 3,
     "fields": {
-      "tag": 2,
-      "product": 3
+      "tag": 3,
+      "product": 2,
+      "created_at": "2025-11-17T13:58:37.806Z"
     }
   },
   {
     "model": "apps.producttag",
     "pk": 4,
     "fields": {
-      "tag": 18,
-      "product": 2
+      "tag": 2,
+      "product": 18,
+      "created_at": "2025-11-17T13:58:37.806Z"
     }
   }
 ]

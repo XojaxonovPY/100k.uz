@@ -3,6 +3,7 @@ import random
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.core.cache import cache
+from django.http import HttpResponseRedirect, HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -79,6 +80,6 @@ class LoginFormView(FormView):
 
 
 class LogoutView(View):
-    def get(self, request):
+    def get(self, request: HttpRequest) -> HttpResponseRedirect:
         logout(request)
         return redirect('login')

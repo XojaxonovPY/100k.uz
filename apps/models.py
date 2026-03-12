@@ -1,10 +1,12 @@
-from django.db.models import Model, CharField, ForeignKey, CASCADE, ImageField, EmailField, DecimalField, IntegerField
-from django.db.models import PositiveIntegerField, BooleanField,TextField,DateField
-from django.db.models import DateTimeField, FileField, URLField, SET_NULL
+from typing import cast, Any
+
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import UserManager, AbstractUser
+from django.db.models import DateTimeField, FileField, URLField, SET_NULL, ManyToManyField
+from django.db.models import Model, CharField, ForeignKey, CASCADE, ImageField, EmailField, DecimalField, IntegerField
+from django.db.models import PositiveIntegerField, BooleanField, TextField, DateField
 from django.db.models.enums import TextChoices
-from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class CustomUserManager(UserManager):
@@ -50,7 +52,7 @@ class User(AbstractUser):
     district = ForeignKey('apps.District', on_delete=CASCADE, related_name='users', null=True, blank=True)
     image = ImageField(upload_to='users', null=True, blank=True)
     balance = IntegerField(default=0)
-    role = CharField(max_length=30, choices=RoleType.choices, default=RoleType.SELLER)
+    role = CharField(max_length=30, choices=cast(Any, RoleType.choices), default=RoleType.SELLER)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
@@ -86,17 +88,22 @@ class Product(Model):
             return 0
         percent = int(round((self.order_count / self.visit_count) * 100))
         if percent == 0 and self.order_count > 0:
-            return 1  # eng kamida 1%
+            return 1
         return percent
 
 
 class ProductTag(Model):
-    tag = ForeignKey('apps.Product', on_delete=CASCADE, related_name='tags')
-    product = ForeignKey('apps.Tag', on_delete=CASCADE, related_name='products')
+    class Meta:
+        db_table = 'apps_products_tags'
+
+    tag = ForeignKey('apps.Tag', on_delete=CASCADE)
+    product = ForeignKey('apps.Product', on_delete=CASCADE)
+    created_at = DateTimeField(auto_now_add=True)
 
 
 class Tag(Model):
     name = CharField(max_length=255)
+    product_tag = ManyToManyField('apps.Product', related_name='tags', through="apps.ProductTag")
 
     def __str__(self):
         return self.name
@@ -117,7 +124,7 @@ class Order(Model):
     phone_number = CharField(max_length=20)
     total = DecimalField(max_digits=10, decimal_places=2)
     quantity = PositiveIntegerField(default=1)
-    status = CharField(max_length=100, choices=StatusType.choices, default=StatusType.NEW)
+    status = CharField(max_length=100, choices=cast(Any, StatusType.choices), default=StatusType.NEW)
     comment = TextField(null=True, blank=True)
     delivery_time = DateField(null=True, blank=True)
     stream = ForeignKey('apps.Stream', on_delete=SET_NULL, related_name='orders', null=True, blank=True)
@@ -188,6 +195,8 @@ class Penalty(Model):
 
 
 class ProductImage(Model):
+    class Meta:
+        db_table = 'apps_product_image'
     image = ImageField(upload_to='images/')
     product = ForeignKey('apps.Product', on_delete=CASCADE, related_name='images')
 
@@ -236,7 +245,7 @@ class Stream(Model):
         return self.name
 
 
-class Settings(Model):
+class Setting(Model):
     phone_number = CharField(max_length=20)
     tg_ling = URLField(max_length=255)
     tg_bot = CharField(max_length=255)

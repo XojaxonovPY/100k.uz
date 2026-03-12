@@ -2,15 +2,14 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q, Count, Sum
 from django.http import HttpRequest
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import DetailView, CreateView, DeleteView
 
 from apps.forms import PaymentModelForm, StreamModelForm
 from apps.mixin_views import BaseTemplateView, BaseListView
 from apps.models import Payment, Transaction
-from apps.models import Product, Category, Settings, Region, News, Tag, Seller, Stream, Order, Charity, Penalty
+from apps.models import Product, Category, Setting, Region, News, Tag, Seller, Stream, Order, Charity, Penalty
 
 
 class MainTemplateView(BaseTemplateView):
@@ -20,7 +19,7 @@ class MainTemplateView(BaseTemplateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['news'] = News.objects.all()[:3]
-        data['admin'] = Settings.objects.first()
+        data['admin'] = Setting.objects.first()
         return data
 
 
@@ -57,7 +56,7 @@ class MarketListView(BaseListView):
         data['categories'] = Category.objects.all()
         data['tags'] = Tag.objects.all()
         data['sellers'] = Seller.objects.all()
-        data['admin'] = Settings.objects.get()
+        data['admin'] = Setting.objects.get()
         return data
 
 
@@ -127,7 +126,7 @@ class DonatListView(BaseListView):
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(*args, **kwargs)
         data['total_amount'] = Charity.objects.aggregate(total=Sum('amount')).get('total', 0)
-        data['admin'] = Settings.objects.get()
+        data['admin'] = Setting.objects.get()
         return data
 
 
@@ -199,19 +198,6 @@ def chart_view(request: HttpRequest):
 
 # ============================================== Stream
 
-
-class StreamView(View):
-    def post(self, request):
-        stream = {
-            'name': request.POST.get('name'),
-            'product_id': int(request.POST.get('product')),
-            'user_id': int(request.user.pk),
-            'operator': request.POST.get('operator') == 'on',
-        }
-        Stream.objects.create(**stream)
-        return redirect('stream')
-
-
 class StreamCreateView(CreateView):
     model = Stream
     form_class = StreamModelForm
@@ -248,5 +234,5 @@ class StreamDetailView(DetailView):
         product.save()
         data['product'] = product
         data['regions'] = Region.objects.all()
-        data['admin'] = Settings.objects.first()
+        data['admin'] = Setting.objects.first()
         return data
