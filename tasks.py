@@ -29,7 +29,7 @@ def load(c):
 
 @task
 def dump(c):
-    c.run("python manage.py dumpdata apps.User > user.json")
+    c.run("python manage.py dumpdata apps.Product > user.json")
 
 
 @task

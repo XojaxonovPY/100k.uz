@@ -1,6 +1,6 @@
 [
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 4,
     "fields": {
       "image": "images/airpods.jpg",
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 5,
     "fields": {
       "image": "images/airpods.jpg",
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 6,
     "fields": {
       "image": "images/airpods.jpg",
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 7,
     "fields": {
       "image": "images/airpods.jpg",
@@ -32,7 +32,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 8,
     "fields": {
       "image": "images/airpods.jpg",
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 9,
     "fields": {
       "image": "images/airpods.jpg",
@@ -48,7 +48,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 10,
     "fields": {
       "image": "images/airpods.jpg",
@@ -56,7 +56,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 11,
     "fields": {
       "image": "images/airpods.jpg",
@@ -64,7 +64,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 12,
     "fields": {
       "image": "images/airpods.jpg",
@@ -72,7 +72,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 13,
     "fields": {
       "image": "images/mashina.jpg",
@@ -80,7 +80,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 14,
     "fields": {
       "image": "images/mashina.jpg",
@@ -88,7 +88,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 15,
     "fields": {
       "image": "images/mashina.jpg",
@@ -96,7 +96,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 16,
     "fields": {
       "image": "images/mashina.jpg",
@@ -104,7 +104,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 17,
     "fields": {
       "image": "images/mashina.jpg",
@@ -112,7 +112,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 18,
     "fields": {
       "image": "images/mashina.jpg",
@@ -120,7 +120,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 19,
     "fields": {
       "image": "images/mashina.jpg",
@@ -128,7 +128,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 20,
     "fields": {
       "image": "images/mashina.jpg",
@@ -136,7 +136,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 21,
     "fields": {
       "image": "images/mashina.jpg",
@@ -144,7 +144,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 22,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -152,7 +152,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 23,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -160,7 +160,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 24,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -168,7 +168,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 25,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -176,7 +176,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 26,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -184,7 +184,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 27,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -192,7 +192,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 28,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -200,7 +200,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 29,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -208,7 +208,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 30,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -216,7 +216,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 31,
     "fields": {
       "image": "images/sut.jpg",
@@ -224,7 +224,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 32,
     "fields": {
       "image": "images/sut.jpg",
@@ -232,7 +232,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 33,
     "fields": {
       "image": "images/sut.jpg",
@@ -240,7 +240,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 34,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -248,7 +248,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 35,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -256,7 +256,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 36,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -264,7 +264,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 37,
     "fields": {
       "image": "images/sut.jpg",
@@ -272,7 +272,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 38,
     "fields": {
       "image": "images/sut.jpg",
@@ -280,7 +280,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 39,
     "fields": {
       "image": "images/sut.jpg",
@@ -288,7 +288,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 40,
     "fields": {
       "image": "images/sut.jpg",
@@ -296,7 +296,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 41,
     "fields": {
       "image": "images/sut.jpg",
@@ -304,7 +304,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 42,
     "fields": {
       "image": "images/sut.jpg",
@@ -312,7 +312,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 43,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -320,7 +320,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 44,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -328,7 +328,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 45,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -336,7 +336,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 46,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -344,7 +344,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 47,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -352,7 +352,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 48,
     "fields": {
       "image": "images/bilakuziuk.jpg",
@@ -360,7 +360,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 49,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -368,7 +368,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 50,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -376,7 +376,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 51,
     "fields": {
       "image": "images/Fyodor_Dostoyevskiy._Jinoyat_va_jazo.jpg",
@@ -384,7 +384,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 52,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -392,7 +392,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 53,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -400,7 +400,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 54,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -408,7 +408,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 55,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -416,7 +416,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 56,
     "fields": {
       "image": "images/krosovka.jpg",
@@ -424,7 +424,7 @@
     }
   },
   {
-    "model": "apps.product_image",
+    "model": "apps.productimage",
     "pk": 57,
     "fields": {
       "image": "images/krosovka.jpg",

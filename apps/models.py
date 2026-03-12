@@ -88,21 +88,22 @@ class Product(Model):
             return 0
         percent = int(round((self.order_count / self.visit_count) * 100))
         if percent == 0 and self.order_count > 0:
-            return 1  # eng kamida 1%
+            return 1
         return percent
 
 
 class ProductTag(Model):
     class Meta:
         db_table = 'apps_products_tags'
-    tag = ForeignKey('apps.Product', on_delete=CASCADE, related_name='tags')
-    product = ForeignKey('apps.Tag', on_delete=CASCADE, related_name='products')
+
+    tag = ForeignKey('apps.Tag', on_delete=CASCADE)
+    product = ForeignKey('apps.Product', on_delete=CASCADE)
     created_at = DateTimeField(auto_now_add=True)
 
 
 class Tag(Model):
     name = CharField(max_length=255)
-    product_tags = ManyToManyField('apps.Product', related_name='tags', through=ProductTag)
+    product_tag = ManyToManyField('apps.Product', related_name='tags', through="apps.ProductTag")
 
     def __str__(self):
         return self.name

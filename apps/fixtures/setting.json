@@ -1,6 +1,6 @@
 [
   {
-    "model": "apps.settings",
+    "model": "apps.setting",
     "pk": 1,
     "fields": {
       "phone_number": "+998(95) 122-22-32",
