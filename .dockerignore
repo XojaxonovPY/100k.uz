@@ -1,6 +1,0 @@
-.venv
-.idea
-.env_copy
-Procfile
-.gitignore
-apps/migrations/*
