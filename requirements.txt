@@ -25,7 +25,6 @@ gunicorn==23.0.0
 honcho==2.0.0
 humanize==4.12.3
 kombu==5.5.3
-mysqlclient==2.2.8
 packaging==25.0
 pillow==11.2.1
 prometheus_client==0.22.0
@@ -45,3 +44,5 @@ tzdata==2025.2
 vine==5.1.0
 wcwidth==0.2.13
 whitenoise==6.9.0
+pymysql
+cryptography

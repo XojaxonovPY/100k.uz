@@ -1,38 +1,57 @@
 version: '3.8'
 
-
 services:
   web:
     build: .
-    image: 100k.uz
     container_name: 100.uz_con
-    command: "sh -c '
-    python manage.py makemigrations && 
-    python manage.py migrate && python manage.py loaddata product.json category.json district.json image.json region.json seller.json tag.json option.json attr.json setting.json &&
-    python manage.py runserver 0.0.0.0:8001'"
+    command: >
+      sh -c "python manage.py migrate --noinput && 
+             python manage.py loaddata category.json region.json district.json seller.json tag.json product.json image.json option.json attr.json setting.json &&
+             python manage.py collectstatic --noinput && 
+             python manage.py runserver 0.0.0.0:8001"
     ports:
       - '8001:8001'
     depends_on:
-      - rd
-      - db
+      db:
+        condition: service_healthy
+      rd:
+        condition: service_started
 
   db:
-    image: postgres:alpine
-    container_name: pg2
-    ports:
-      - '5434:5432'
+    image: mysql:8.0-bookworm
+    container_name: ms2
+    restart: always
     environment:
-      POSTGRES_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: "1"
+      MYSQL_DATABASE: 100k
+    ports:
+      - '3308:3306'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p1"]
+      timeout: 5s
+      retries: 10
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - ms_data:/var/lib/mysql
 
   celery:
     build: .
-    image: 100k.celery
     container_name: 100k.celery_con
     command: [ "celery", "-A", "root", "worker", "--loglevel=info" ]
     depends_on:
-      - rd
+      db:
+        condition: service_healthy
+      rd:
+        condition: service_started
+
+  flower:
+    build: .
+    container_name: 100k.celery_con_flower
+    command: [ "celery", "-A", "root", "flower", "--port=5555" ]
+    ports:
+      - "5555:5555"
+    depends_on:
+      celery:
+        condition: service_started
 
   rd:
     image: redis:alpine
@@ -43,5 +62,5 @@ services:
       - redis_data:/data
 
 volumes:
-  pg_data:
+  ms_data:
   redis_data:

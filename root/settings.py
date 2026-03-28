@@ -33,6 +33,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 # Application definition
+REDIS_URL = getenv("REDIS_SERVER_URL")
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -90,7 +91,7 @@ DATABASES = {
         'NAME': getenv('DB_NAME'),
         'USER': getenv('DB_USER'),
         'PASSWORD': getenv('DB_PASSWORD'),
-        'HOST': getenv('DB_HOST'),
+        'HOST': getenv('DB_SERVER_HOST'),
         'PORT': getenv('DB_PORT'),
         'OPTIONS': {
             'charset': 'utf8mb4',
@@ -132,8 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [join(BASE_DIR, 'static')]
-STATIC_ROOT = join(BASE_DIR, 'apps', 'static')
+STATIC_ROOT = join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
@@ -152,7 +152,7 @@ AUTH_USER_MODEL = 'apps.User'
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": getenv('REDIS_URL'),
+        "LOCATION": REDIS_URL,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -189,4 +189,4 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'default'
-CELERY_BROKER_URL = getenv("REDIS_URL")
+CELERY_BROKER_URL = REDIS_URL

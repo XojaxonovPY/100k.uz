@@ -2,4 +2,3 @@
 .idea
 .env_copy
 .gitignore
-apps/migrations/*
